@@ -1,6 +1,6 @@
 import 'package:ecom_mobile/up_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/home.dart';
+import 'package:ecom_mobile/home/home.dart';
 
 void main() {
   runApp(MainApp());
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
       title: 'Nome',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
