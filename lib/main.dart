@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/home/home.dart';
-import 'package:ecom_mobile/login/login.dart';
+import 'package:ecom_mobile/View/home/home.dart';
+import 'package:ecom_mobile/View/login/login.dart';
 
 void main() {
   runApp(MainApp());

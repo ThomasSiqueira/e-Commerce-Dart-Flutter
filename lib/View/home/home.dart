@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/home/horizontalScrollList.dart';
-import 'package:ecom_mobile/home/horizontalScrollItens.dart';
-import 'package:ecom_mobile/home/side_menu.dart';
+import 'package:ecom_mobile/View/home/horizontalScrollList.dart';
+import 'package:ecom_mobile/View/home/horizontalScrollItens.dart';
+import 'package:ecom_mobile/View/home/side_menu.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
