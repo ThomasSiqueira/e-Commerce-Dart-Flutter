@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                Text("Espaço para barra de pesquisa"),
                 Container(
                   height: 100,
                   child: ListView(
