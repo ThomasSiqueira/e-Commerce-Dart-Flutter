@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecom_mobile/login/login.dart';
 import 'package:ecom_mobile/home/user_side_menu.dart';
 
 class SideMenu extends StatelessWidget {
@@ -28,7 +29,7 @@ class SideMenu extends StatelessWidget {
             title: const Text('Home'),
           ),
           ListTile(
-            title: const Text('Perfil'),
+            title: const Text('Carrinho'),
             onTap: () {
               // Update the state of the app
               // Then close the drawer
@@ -36,11 +37,14 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Carrinho'),
+            title: const Text('Login'),
             onTap: () {
               // Update the state of the app
               // Then close the drawer
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute<void>(builder: (BuildContext context) {
+                return LoginPage();
+              }));
             },
           ),
         ],
