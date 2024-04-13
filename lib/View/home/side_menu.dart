@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/login/login.dart';
-import 'package:ecom_mobile/home/user_side_menu.dart';
+import 'package:ecom_mobile/View/login/login.dart';
+import 'package:ecom_mobile/View/home/user_side_menu.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});
