@@ -1,3 +1,8 @@
+import 'package:ecom_mobile/Model/open_database.dart';
+import 'package:ecom_mobile/Model/usuario.dart';
+import 'package:ecom_mobile/Model/usuarios_database.dart';
+import 'package:ecom_mobile/adicionaUsuarios.dart';
+import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 
@@ -63,14 +68,14 @@ class _SignupPageState extends State<SignupPage> {
                                 .withOpacity(0.1),
                             filled: true,
                             prefixIcon: const Icon(Icons.person)),
+                        onChanged: (value) {
+                          _username = value;
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira seu nome';
                           }
                           return null;
-                        },
-                        onSaved: (value) {
-                          _username = value!;
                         },
                       ),
                       const SizedBox(height: 20),
@@ -84,14 +89,15 @@ class _SignupPageState extends State<SignupPage> {
                                 .withOpacity(0.1),
                             filled: true,
                             prefixIcon: const Icon(Icons.email)),
+
+                        onChanged: (value) {
+                          _email = value;
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira seu email';
                           }
                           return null;
-                        },
-                        onSaved: (value) {
-                          _email = value!;
                         },
                       ),
                       const SizedBox(height: 20),
@@ -111,7 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                         onChanged: (value) {
                           _password = value;
                         },
-                        
+
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira sua senha';
@@ -152,12 +158,28 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     padding: const EdgeInsets.only(top: 3, left: 3),
                     child: ElevatedButton(
-                      onPressed: () {
-                        print("Password: $_password");
-                        print("Confirm Password: $_confirmPassword");
-
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
+
+                        final newUser = Usuario(
+                          nome: _username,
+                          email: _email,
+                          senha: _password,
+                        );
+
+                        await init(newUser);
+                        
+                          // Box<Usuario> usuarioBox = ObjectBox.usuarioBox;    
+
+                          // final query = usuarioBox.query().build();
+                          // final usuarios = query.find();
+
+                          // usuarioBox.put(newUser);
+
+                          // for (Usuario usuario in usuarios) {
+                          //   print(usuario.email);
+                          // }
                         }
                       },
                       child: const Text(
