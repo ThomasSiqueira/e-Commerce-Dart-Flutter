@@ -130,7 +130,10 @@ class _LoginPageState extends State<LoginPage> {
                             });
                           } else {
                             //todo: ir para homepage
-                            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                            Navigator.pushNamed(
+                              context, 
+                              '/home',
+                              arguments: usuarioInfo);
                           }
 
                         } else {
