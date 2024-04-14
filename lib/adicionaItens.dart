@@ -4,6 +4,7 @@ import 'package:ecom_mobile/objectbox.g.dart';
 
 init() async {
   Box<Produto> produtoBox = ObjectBox.produtoBox;
+
   Produto produto = Produto(
       nome: "Celular3",
       precoBase: 2000.00,

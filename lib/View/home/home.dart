@@ -1,7 +1,7 @@
 import 'package:ecom_mobile/ViewModel/vertical_scroll_itens.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_list.dart';
-import 'package:ecom_mobile/ViewModel/horizontal_scroll_Itens.dart';
+import 'package:ecom_mobile/ViewModel/horizontal_scroll_itens.dart';
 import 'package:ecom_mobile/ViewModel/vertical_scroll_itens.dart';
 import 'package:ecom_mobile/View/home/side_menu.dart';
 
