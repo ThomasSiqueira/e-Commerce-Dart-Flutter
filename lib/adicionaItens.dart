@@ -19,8 +19,8 @@ init() async {
   final query = produtoBox.query().build();
   final produtos = query.find();
   //query.remove();
-  //produtoBox.put(produto);
-  //produtoBox.put(produto2);
+  // produtoBox.put(produto);
+  // produtoBox.put(produto2);
 
   for (Produto produto in produtos) {
     print(produto.nome);
