@@ -29,7 +29,31 @@ class _SignupPageState extends State<SignupPage> {
   String _password = '';
   String _confirmPassword = '';
 
-   
+   Future<void> _showSuccessDialog() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Cadastro Concluído'),
+          content: Text('Seu cadastro foi realizado com sucesso!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +213,8 @@ class _SignupPageState extends State<SignupPage> {
                             senha: _password,
                           );
                           adicionaUsuario(newUser);
+
+                          await _showSuccessDialog();
                         }
                       },
                       child: const Text(
