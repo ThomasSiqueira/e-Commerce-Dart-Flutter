@@ -14,9 +14,14 @@ class SearchBox extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: Align(
-              child: Icon(
-                Icons.search,
-                size: 50,
+              child: GestureDetector(
+                onTap: () {
+                  // TODO pesquisa aqui!
+                },
+                child: Icon(
+                  Icons.search,
+                  size: 50,
+                ),
               ),
               alignment: Alignment.centerRight,
             ),
