@@ -2,7 +2,7 @@ import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/View/login/register.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
-import 'package:ecom_mobile/adicionaItens.dart';
+import 'package:ecom_mobile/Model/init_database.dart';
 import 'package:ecom_mobile/Model/open_database.dart';
 
 void main() async {
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       title: 'Nome',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }

@@ -15,10 +15,10 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
-   String _username = '';
-   String _email = '';
-   String _password = '';
-   String _confirmPassword = '';
+  String _username = '';
+  String _email = '';
+  String _password = '';
+  String _confirmPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       Text(
                         "Criar Conta",
-                        style:
-                            TextStyle(fontSize: 15, color: Colors.grey[700]),
+                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       )
                     ],
                   ),
@@ -89,7 +88,6 @@ class _SignupPageState extends State<SignupPage> {
                                 .withOpacity(0.1),
                             filled: true,
                             prefixIcon: const Icon(Icons.email)),
-
                         onChanged: (value) {
                           _email = value;
                         },
@@ -98,7 +96,10 @@ class _SignupPageState extends State<SignupPage> {
                             return 'Por favor, insira seu email';
                           }
 
-                          final emailExiste = ObjectBox.usuarioBox.query(Usuario_.email.equals(value)).build().findFirst();
+                          final emailExiste = ObjectBox.usuarioBox
+                              .query(Usuario_.email.equals(value))
+                              .build()
+                              .findFirst();
 
                           if (emailExiste != null) {
                             return "Email em uso. Use outro email";
@@ -114,24 +115,20 @@ class _SignupPageState extends State<SignupPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
-                          fillColor:
-                              Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                          fillColor: Color.fromARGB(255, 136, 129, 137)
+                              .withOpacity(0.1),
                           filled: true,
                           prefixIcon: const Icon(Icons.password),
                         ),
                         obscureText: true,
-                        
                         onChanged: (value) {
                           _password = value;
                         },
-
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira sua senha';
                           }
                           return null;
-                      
-                         
                         },
                       ),
                       const SizedBox(height: 20),
@@ -141,8 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
-                          fillColor:
-                              Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                          fillColor: Color.fromARGB(255, 136, 129, 137)
+                              .withOpacity(0.1),
                           filled: true,
                           prefixIcon: const Icon(Icons.password),
                         ),
@@ -169,20 +166,17 @@ class _SignupPageState extends State<SignupPage> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
 
-                        final newUser = Usuario(
-                          nome: _username,
-                          email: _email,
-                          senha: _password,
-                        );
-                          await init(newUser);
+                          final newUser = Usuario(
+                            nome: _username,
+                            email: _email,
+                            senha: _password,
+                          );
+                          adicionaUsuario(newUser);
                         }
                       },
                       child: const Text(
                         "Confirmar",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors
-                                .white), 
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
