@@ -97,6 +97,13 @@ class _SignupPageState extends State<SignupPage> {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira seu email';
                           }
+
+                          final emailExiste = ObjectBox.usuarioBox.query(Usuario_.email.equals(value)).build().findFirst();
+
+                          if (emailExiste != null) {
+                            return "Email em uso. Use outro email";
+                          }
+
                           return null;
                         },
                       ),
@@ -167,19 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                           email: _email,
                           senha: _password,
                         );
-
-                        await init(newUser);
-                        
-                          // Box<Usuario> usuarioBox = ObjectBox.usuarioBox;    
-
-                          // final query = usuarioBox.query().build();
-                          // final usuarios = query.find();
-
-                          // usuarioBox.put(newUser);
-
-                          // for (Usuario usuario in usuarios) {
-                          //   print(usuario.email);
-                          // }
+                          await init(newUser);
                         }
                       },
                       child: const Text(
