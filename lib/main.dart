@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/View/search/results.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/View/login/register.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
       home: const HomePage(),
+      routes: {
+        '/results': (context) => SearchResults(),
+      },
     );
   }
 }
