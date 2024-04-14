@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 
 class SearchResults extends StatelessWidget {
@@ -7,6 +8,9 @@ class SearchResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: SearchBox(),
+      ),
     );
   }
 }

@@ -11,11 +11,16 @@ class SearchBox extends StatelessWidget {
       child: Stack(
         children: [
           TextField(
+            autofocus: ModalRoute.of(context)?.settings.name == '/results',
             controller: _controller,
             decoration: InputDecoration(
               hintText: "Pesquisar",
             ),
             onSubmitted: (value) {},
+            onTap: () => {
+              if (ModalRoute.of(context)?.settings.name != '/results')
+                {Navigator.pushNamed(context, '/results')}
+            },
           ),
           Padding(
             padding: const EdgeInsets.all(3.0),

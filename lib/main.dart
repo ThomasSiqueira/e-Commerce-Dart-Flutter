@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/View/search/results.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
 import 'package:ecom_mobile/adicionaItens.dart';
@@ -20,6 +21,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
       home: const HomePage(),
+      routes: {
+        '/results': (context) => SearchResults(),
+      },
     );
   }
 }
