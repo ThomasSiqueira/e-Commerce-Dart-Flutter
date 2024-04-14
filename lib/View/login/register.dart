@@ -1,3 +1,4 @@
+
 import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/usuarios_database.dart';
@@ -5,6 +6,14 @@ import 'package:ecom_mobile/Model/adicionaUsuarios.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+    ).hasMatch(this);
+  }
+}
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -19,6 +28,8 @@ class _SignupPageState extends State<SignupPage> {
   String _email = '';
   String _password = '';
   String _confirmPassword = '';
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +105,8 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira seu email';
+                          } else if (!value.isValidEmail()) {
+                            return "Por favor, insira um email válido";
                           }
 
                           final emailExiste = ObjectBox.usuarioBox
@@ -127,6 +140,10 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira sua senha';
+                          } else if (value.length < 8) {
+                              return 'A senha deve ter pelo menos 8 caracteres';
+                          } else if (!value.contains(RegExp(r'[A-Z]'))) {
+                              return 'A senha deve conter pelo menos um caractere maiúsculo';
                           }
                           return null;
                         },
@@ -212,3 +229,4 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
+
