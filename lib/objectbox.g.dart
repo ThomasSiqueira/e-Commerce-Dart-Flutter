@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'Model/produto.dart';
+import 'Model/usuario.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -52,6 +53,35 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 6244274662272079735),
+      name: 'Usuario',
+      lastPropertyId: const IdUid(4, 3444600885132475977),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 7743339434355618712),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1754136433113038326),
+            name: 'nome',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2351791196110151264),
+            name: 'senha',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 3444600885132475977),
+            name: 'email',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -75,7 +105,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 7378542966195506313),
+      lastEntityId: const IdUid(2, 6244274662272079735),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -129,6 +159,42 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 12, ''));
 
           return object;
+        }),
+    Usuario: EntityDefinition<Usuario>(
+        model: _entities[1],
+        toOneRelations: (Usuario object) => [],
+        toManyRelations: (Usuario object) => {},
+        getId: (Usuario object) => object.id,
+        setId: (Usuario object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Usuario object, fb.Builder fbb) {
+          final nomeOffset = fbb.writeString(object.nome);
+          final senhaOffset = fbb.writeString(object.senha);
+          final emailOffset = fbb.writeString(object.email);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, nomeOffset);
+          fbb.addOffset(2, senhaOffset);
+          fbb.addOffset(3, emailOffset);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Usuario(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              nome: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              senha: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, ''),
+              email: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, ''));
+
+          return object;
         })
   };
 
@@ -154,4 +220,19 @@ class Produto_ {
   /// see [Produto.imagem]
   static final imagem =
       QueryStringProperty<Produto>(_entities[0].properties[4]);
+}
+
+/// [Usuario] entity fields to define ObjectBox queries.
+class Usuario_ {
+  /// see [Usuario.id]
+  static final id = QueryIntegerProperty<Usuario>(_entities[1].properties[0]);
+
+  /// see [Usuario.nome]
+  static final nome = QueryStringProperty<Usuario>(_entities[1].properties[1]);
+
+  /// see [Usuario.senha]
+  static final senha = QueryStringProperty<Usuario>(_entities[1].properties[2]);
+
+  /// see [Usuario.email]
+  static final email = QueryStringProperty<Usuario>(_entities[1].properties[3]);
 }

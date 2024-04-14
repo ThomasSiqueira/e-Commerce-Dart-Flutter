@@ -36,9 +36,38 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:6244274662272079735",
+      "lastPropertyId": "4:3444600885132475977",
+      "name": "Usuario",
+      "properties": [
+        {
+          "id": "1:7743339434355618712",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1754136433113038326",
+          "name": "nome",
+          "type": 9
+        },
+        {
+          "id": "3:2351791196110151264",
+          "name": "senha",
+          "type": 9
+        },
+        {
+          "id": "4:3444600885132475977",
+          "name": "email",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:7378542966195506313",
+  "lastEntityId": "2:6244274662272079735",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

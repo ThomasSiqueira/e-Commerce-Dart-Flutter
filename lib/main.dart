@@ -1,7 +1,9 @@
 import 'package:ecom_mobile/View/search/results.dart';
+import 'package:ecom_mobile/View/login/login.dart';
+import 'package:ecom_mobile/View/login/register.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
-import 'package:ecom_mobile/adicionaItens.dart';
+import 'package:ecom_mobile/Model/init_database.dart';
 import 'package:ecom_mobile/Model/open_database.dart';
 
 void main() async {
