@@ -15,10 +15,7 @@ class SearchBox extends StatelessWidget {
             decoration: InputDecoration(
               hintText: "Pesquisar",
             ),
-            onSubmitted: (value) {
-              // Aqui você pode usar o Navigator para mudar a página
-              // Use o valor para a pesquisa
-            },
+            onSubmitted: (value) {},
           ),
           Padding(
             padding: const EdgeInsets.all(3.0),
@@ -26,8 +23,6 @@ class SearchBox extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   print(_controller.text);
-                  // Aqui você pode usar o Navigator para mudar a página
-                  // Use _controller.text para obter o texto da caixa de pesquisa
                 },
                 child: Icon(
                   Icons.search,
