@@ -1,3 +1,5 @@
+import 'package:ecom_mobile/View/login/login.dart';
+import 'package:ecom_mobile/View/login/register.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
 import 'package:ecom_mobile/adicionaItens.dart';
@@ -19,7 +21,7 @@ class MainApp extends StatelessWidget {
       title: 'Nome',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }
