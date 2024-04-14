@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecom_mobile/View/login/register.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -6,12 +7,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 90.0, 16.0, 16.0), 
+          padding: const EdgeInsets.fromLTRB(16.0, 90.0, 16.0, 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -37,7 +36,6 @@ class LoginPage extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
               ),
-
               const SizedBox(height: 1),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,22 +48,24 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                    },
-                    child: const Text(
-                      'Registrar',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.blue,
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                          return SignupPage();
+                        }));
+                      },
+                      child: const Text(
+                        'Registrar',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.blue,
+                        ),
                       ),
-                    ),
-                    style: const ButtonStyle(
-                      mouseCursor: MaterialStateMouseCursor.clickable
-                    )
-                  ),
+                      style: const ButtonStyle(
+                          mouseCursor: MaterialStateMouseCursor.clickable)),
                 ],
               ),
-
               const SizedBox(height: 45),
               SizedBox(
                 width: 200,
@@ -83,7 +83,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-             
             ],
           ),
         ),
