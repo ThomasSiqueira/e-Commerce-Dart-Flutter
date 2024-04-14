@@ -5,20 +5,24 @@ import 'package:ecom_mobile/objectbox.g.dart';
 init() async {
   Box<Produto> produtoBox = ObjectBox.produtoBox;
   Produto produto = Produto(
-      nome: "Celular",
-      precoBase: 1000.00,
+      nome: "Celular3",
+      precoBase: 2000.00,
       tags: ['Promocao', 'MaisVendidos', 'Celular'],
-      imagem: './');
+      imagem: 'assets/Produtos/celular1.webp');
 
   Produto produto2 = Produto(
-      nome: "Celular2", precoBase: 2000.00, tags: ['Celular'], imagem: './');
-
-  produtoBox.put(produto);
-  produtoBox.put(produto2);
+      nome: "Celular2",
+      precoBase: 2000.00,
+      tags: ['Celular'],
+      imagem: 'assets/Produtos/celular1.webp');
 
   final query = produtoBox.query().build();
   final produtos = query.find();
+  //query.remove();
+  //produtoBox.put(produto);
+  //produtoBox.put(produto2);
 
-  print(produtos[0].nome);
-  print(produtos[1].nome);
+  for (Produto produto in produtos) {
+    print(produto.nome);
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecom_mobile/View/login/login.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -20,7 +21,6 @@ class SignupPage extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     const SizedBox(height: 60.0),
-
                     const Text(
                       "Registrar",
                       style: TextStyle(
@@ -45,48 +45,46 @@ class SignupPage extends StatelessWidget {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
-                          fillColor: Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                          fillColor: Color.fromARGB(255, 136, 129, 137)
+                              .withOpacity(0.1),
                           filled: true,
                           prefixIcon: const Icon(Icons.person)),
                     ),
-
                     const SizedBox(height: 20),
-
                     TextField(
                       decoration: InputDecoration(
                           hintText: "Email",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
-                          fillColor: Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                          fillColor: Color.fromARGB(255, 136, 129, 137)
+                              .withOpacity(0.1),
                           filled: true,
                           prefixIcon: const Icon(Icons.email)),
                     ),
-
                     const SizedBox(height: 20),
-
                     TextField(
                       decoration: InputDecoration(
                         hintText: "Senha",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
-                        fillColor: Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                        fillColor:
+                            Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.password),
                       ),
                       obscureText: true,
                     ),
-
                     const SizedBox(height: 20),
-
                     TextField(
                       decoration: InputDecoration(
                         hintText: "Confirmar Senha",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
-                        fillColor: Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
+                        fillColor:
+                            Color.fromARGB(255, 136, 129, 137).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.password),
                       ),
@@ -95,32 +93,39 @@ class SignupPage extends StatelessWidget {
                   ],
                 ),
                 Container(
-                    padding: const EdgeInsets.only(top: 3, left: 3),
-                    child: ElevatedButton(
-                      onPressed: () {
-                      },
-                      child: const Text(
-                        "Confirmar",
-                        style: TextStyle(fontSize: 20, color: Colors.white), // Define a cor do texto como branco
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.blue,
-                      ),
+                  padding: const EdgeInsets.only(top: 3, left: 3),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Confirmar",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors
+                              .white), // Define a cor do texto como branco
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: Colors.blue,
                     ),
                   ),
-
-                
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text("Já tem uma conta?"),
                     TextButton(
                         onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute<void>(
+                              builder: (BuildContext context) {
+                            return LoginPage();
+                          }));
                         },
-                        child: const Text("Login", style: TextStyle(color: Colors.blue),)
-                    )
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.blue),
+                        ))
                   ],
                 )
               ],

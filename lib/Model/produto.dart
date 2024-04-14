@@ -10,7 +10,7 @@ class Produto {
   final String imagem;
 
   Produto(
-      {this.id = -1,
+      {this.id,
       required this.nome,
       required this.tags,
       required this.precoBase,
