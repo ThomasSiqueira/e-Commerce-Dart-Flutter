@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SearchBox extends StatelessWidget {
-  SearchBox({super.key});
+  SearchBox({super.key, this.onSearch = _defaultOnSearch});
 
+  static void _defaultOnSearch(p0) {
+    print("No");
+  }
+
+  final Function(String) onSearch;
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -10,24 +15,33 @@ class SearchBox extends StatelessWidget {
     return Container(
       child: Stack(
         children: [
-          TextField(
-            autofocus: ModalRoute.of(context)?.settings.name == '/results',
-            controller: _controller,
-            decoration: InputDecoration(
-              hintText: "Pesquisar",
+          Material(
+            // Add this
+            child: TextField(
+              autofocus: ModalRoute.of(context)?.settings.name == '/results',
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: "Pesquisar",
+              ),
+              onSubmitted: (value) {
+                if (onSearch != null) {
+                  onSearch(value);
+                }
+              },
+              onTap: () => {
+                if (ModalRoute.of(context)?.settings.name != '/results')
+                  {Navigator.pushNamed(context, '/results')}
+              },
             ),
-            onSubmitted: (value) {},
-            onTap: () => {
-              if (ModalRoute.of(context)?.settings.name != '/results')
-                {Navigator.pushNamed(context, '/results')}
-            },
           ),
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: Align(
               child: GestureDetector(
                 onTap: () {
-                  print(_controller.text);
+                  if (onSearch != null) {
+                    onSearch(_controller.text);
+                  }
                 },
                 child: Icon(
                   Icons.search,

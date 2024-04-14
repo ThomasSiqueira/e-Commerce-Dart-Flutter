@@ -16,7 +16,7 @@ void main() async {
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key}); 
+  const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,17 +24,18 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
       onGenerateRoute: (settings) {
         if (settings.name == '/home') {
-          final Usuario usuario = settings.arguments as Usuario; // Recebe o usuário como parâmetro
+          final Usuario usuario =
+              settings.arguments as Usuario; // Recebe o usuário como parâmetro
           return MaterialPageRoute(
             builder: (context) => HomePage(usuario: usuario),
           );
         }
         return null;
       },
-      initialRoute: '/login', 
+      initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
-        '/results': (context) => SearchBox(),
+        '/results': (context) => SearchResults(),
       },
     );
   }

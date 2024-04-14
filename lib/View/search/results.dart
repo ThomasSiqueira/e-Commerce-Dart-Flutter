@@ -8,8 +8,10 @@ class SearchResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: SearchBox(),
+      body: Column(
+        children: [
+          SearchBox(),
+        ],
       ),
     );
   }

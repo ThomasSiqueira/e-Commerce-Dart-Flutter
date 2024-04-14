@@ -1,4 +1,3 @@
-
 import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/usuarios_database.dart';
@@ -10,8 +9,8 @@ import 'package:ecom_mobile/View/login/login.dart';
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-    ).hasMatch(this);
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
   }
 }
 
@@ -29,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
   String _password = '';
   String _confirmPassword = '';
 
-   Future<void> _showSuccessDialog() async {
+  Future<void> _showSuccessDialog() async {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -40,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),
@@ -53,7 +52,6 @@ class _SignupPageState extends State<SignupPage> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -165,9 +163,9 @@ class _SignupPageState extends State<SignupPage> {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira sua senha';
                           } else if (value.length < 8) {
-                              return 'A senha deve ter pelo menos 8 caracteres';
+                            return 'A senha deve ter pelo menos 8 caracteres';
                           } else if (!value.contains(RegExp(r'[A-Z]'))) {
-                              return 'A senha deve conter pelo menos um caractere maiúsculo';
+                            return 'A senha deve conter pelo menos um caractere maiúsculo';
                           }
                           return null;
                         },
@@ -255,4 +253,3 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
-

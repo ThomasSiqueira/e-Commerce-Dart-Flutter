@@ -1,4 +1,3 @@
-
 import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/usuarios_database.dart';
@@ -120,8 +119,10 @@ class _LoginPageState extends State<LoginPage> {
                       _errorMessage = '';
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                       
-                        final usuarioInfo = ObjectBox.usuarioBox.query(Usuario_.email.equals(_email)).build().findFirst();
+                        final usuarioInfo = ObjectBox.usuarioBox
+                            .query(Usuario_.email.equals(_email))
+                            .build()
+                            .findFirst();
 
                         if (usuarioInfo != null) {
                           if (_password != usuarioInfo.senha) {
@@ -135,7 +136,6 @@ class _LoginPageState extends State<LoginPage> {
                               '/home',
                               arguments: usuarioInfo);
                           }
-
                         } else {
                           setState(() {
                             _errorMessage = 'Credenciais inválidas';
