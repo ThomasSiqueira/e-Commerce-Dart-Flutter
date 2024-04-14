@@ -14,9 +14,9 @@ class HorizontalScrollItens {
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              color: Colors.red,
+              color: Colors.white,
             ),
-            width: 300,
+            width: 200,
             height: 60,
             child: Image(image: AssetImage(produtoList[i].imagem)),
           )));

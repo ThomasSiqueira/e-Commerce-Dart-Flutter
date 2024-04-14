@@ -24,7 +24,7 @@ class VerticalScrollList {
     for (var i = 0; i < titulo.length; i++) {
       list.add(Text(titulo[i]));
       list.add(Container(
-        height: 100,
+        height: 200,
         child: ListView(
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
