@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_itens.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_list.dart';
@@ -19,7 +20,7 @@ class VerticalScrollList {
       'Eletrodomesticos'
     ];
     List<Widget> list = [
-      Text("Espaço para barra de pesquisa"),
+      SearchBox(),
       Container(
         height: 100,
         child: ListView(

@@ -10,3 +10,12 @@ List<Produto> pegaProdutos() {
 
   return produtos;
 }
+
+List<Produto> pegaProdutosComNome(String nome) {
+  Box<Produto> produtoBox = ObjectBox.produtoBox;
+
+  final query = produtoBox.query(Produto_.nome.equals(nome)).build();
+  final produtos = query.find();
+
+  return produtos;
+}

@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+import 'package:ecom_mobile/Model/usuario.dart';
+import 'package:ecom_mobile/View/search/results.dart';
+import 'package:ecom_mobile/View/login/login.dart';
+import 'package:ecom_mobile/View/login/register.dart';
+import 'package:ecom_mobile/widgets/search_bar.dart';
+>>>>>>> 73b6001f632bfb24abf0e1016b768259bc15519a
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
 import 'package:ecom_mobile/Model/init_database.dart';
@@ -12,14 +20,26 @@ void main() async {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Nome',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
-      home: const HomePage(),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/home') {
+          final Usuario usuario =
+              settings.arguments as Usuario; // Recebe o usuário como parâmetro
+          return MaterialPageRoute(
+            builder: (context) => HomePage(usuario: usuario),
+          );
+        }
+        return null;
+      },
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/results': (context) => SearchResults(),
+      },
     );
   }
 }
