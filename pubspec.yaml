@@ -64,8 +64,19 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/Produtos/celular1.webp
-    - assets/userIcon.svg
+    - assets/Produtos/redmi12.webp
+    - assets/Produtos/pococ65.jpg
+    - assets/Produtos/notebook_inspiron_15.png
+    - assets/Produtos/ASUS_Vivobook_12.jpg
+    - assets/Produtos/brastemp_375L.jpg
+    - assets/Produtos/Atlas_4bocas.jpg
+    - assets/icones/userIcon.svg
+    - assets/icones/Todos.png
+    - assets/icones/Celulares.png
+    - assets/icones/Computadores.png
+    - assets/icones/Eletrodomesticos.png
+    - assets/icones/Vestuario.png
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

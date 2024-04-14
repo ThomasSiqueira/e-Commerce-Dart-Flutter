@@ -6,7 +6,7 @@ class UserSvg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      'assets/userIcon.svg',
+      'assets/icones/userIcon.svg',
       semanticsLabel: 'User Icon',
     );
   }
