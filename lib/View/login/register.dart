@@ -1,6 +1,6 @@
 import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
-import 'package:ecom_mobile/Model/adicionaUsuarios.dart';
+import 'package:ecom_mobile/Model/adiciona_usuarios.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';

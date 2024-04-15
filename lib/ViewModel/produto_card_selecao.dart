@@ -2,9 +2,9 @@ import 'package:ecom_mobile/View/produto/dedtalhes_produto.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/produto.dart';
 
-class ProdutoCard extends StatelessWidget {
+class ProdutoCardSelecao extends StatelessWidget {
   final Produto produto;
-  const ProdutoCard({super.key, required this.produto});
+  const ProdutoCardSelecao({super.key, required this.produto});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ProdutoCard extends StatelessWidget {
         // Navega para a página do produto quando o card for clicado
         Navigator.push(
           context,
-          MaterialPageRoute(
+          MaterialPageRoute<void>(
             builder: (context) => DetalhesProdutoPage(produto: produto),
           ),
         );
@@ -23,12 +23,12 @@ class ProdutoCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           color: Colors.white,
         ),
-        width: 180,
+        width: 400,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(
-              height: 150,
+              height: 200,
               child: Image(image: AssetImage(produto.imagem)),
             ),
             Center(

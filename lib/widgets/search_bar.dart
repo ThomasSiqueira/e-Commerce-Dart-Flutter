@@ -21,7 +21,7 @@ class SearchBox extends StatelessWidget {
               autofocus: ModalRoute.of(context)?.settings.name == '/results',
               controller: _controller,
               decoration: InputDecoration(
-                hintText: "Pesquisar",
+                hintText: " Pesquisar",
               ),
               onSubmitted: (value) {
                 if (onSearch != null) {

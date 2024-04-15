@@ -1,7 +1,7 @@
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
+import 'package:ecom_mobile/View/home/home.dart';
 
 class SideMenu extends StatelessWidget {
   final Usuario usuario;
@@ -19,12 +19,16 @@ class SideMenu extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
             child: ListView(
               children: [
                 UserSideMenu(),
-                Center(child: Text(usuario.nome)),
+                Center(
+                    child: Text(usuario.nome.toUpperCase(),
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 20))),
               ],
             ),
           ),
@@ -40,13 +44,13 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Login'),
+            title: const Text('Logout'),
             onTap: () {
               // Update the state of the app
               // Then close the drawer
               Navigator.push(context,
                   MaterialPageRoute<void>(builder: (BuildContext context) {
-                return LoginPage();
+                return HomePage(usuario: null);
               }));
             },
           ),

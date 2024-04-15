@@ -1,6 +1,4 @@
 import 'package:ecom_mobile/Model/open_database.dart';
-import 'package:ecom_mobile/Model/usuario.dart';
-import 'package:ecom_mobile/Model/usuarios_database.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/register.dart';
@@ -131,10 +129,9 @@ class _LoginPageState extends State<LoginPage> {
                             });
                           } else {
                             //todo: ir para homepage
-                            Navigator.pushNamed(
-                              context, 
-                              '/home',
-                              arguments: usuarioInfo);
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, '/home',
+                                arguments: usuarioInfo);
                           }
                         } else {
                           setState(() {

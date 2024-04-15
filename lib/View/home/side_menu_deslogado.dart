@@ -16,7 +16,7 @@ class SideMenuDeslogado extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
             child: ListView(
               children: [
