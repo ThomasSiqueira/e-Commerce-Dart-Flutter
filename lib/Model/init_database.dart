@@ -53,13 +53,14 @@ init() async {
   final query = produtoBox.query().build();
   final produtos = query.find();
 
+
   //////////////// somente desinvolvimento
   //query.remove();
 
-  //produtoBox.put(produto);
-  //produtoBox.put(produto2);
-  //produtoBox.put(produto3);
-  //produtoBox.put(produto4);
+  produtoBox.put(produto);
+  produtoBox.put(produto2);
+  produtoBox.put(produto3);
+  produtoBox.put(produto4);
 
   //produtoBox.remove(11);
 
