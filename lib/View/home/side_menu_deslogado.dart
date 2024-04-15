@@ -1,12 +1,9 @@
-import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
 
-class SideMenu extends StatelessWidget {
-  final Usuario usuario;
-  const SideMenu({super.key, required this.usuario});
-
+class SideMenuDeslogado extends StatelessWidget {
+  const SideMenuDeslogado({super.key});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,7 +21,7 @@ class SideMenu extends StatelessWidget {
             child: ListView(
               children: [
                 UserSideMenu(),
-                Center(child: Text(usuario.nome)),
+                Center(child: Text('User')),
               ],
             ),
           ),

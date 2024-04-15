@@ -22,6 +22,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: const ColorScheme.dark()),
+      home: HomePage(usuario: null),
       onGenerateRoute: (settings) {
         if (settings.name == '/home') {
           final Usuario usuario =
@@ -32,7 +33,7 @@ class MainApp extends StatelessWidget {
         }
         return null;
       },
-      initialRoute: '/login',
+      //initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
         '/results': (context) => SearchResults(),
