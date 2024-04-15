@@ -11,8 +11,7 @@ import 'package:ecom_mobile/ViewModel/horizontal_scroll_list.dart';
 class SelecaoPage extends StatelessWidget {
   final Usuario? usuario; //Usuário recebido como parâmetro
   final String flag; //
-  const SelecaoPage({Key? key, required this.usuario, required this.flag})
-      : super(key: key);
+  const SelecaoPage({super.key, required this.usuario, required this.flag});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class SelecaoPage extends StatelessWidget {
 class VerticalScrollSelecao {
   static List<Widget> criaLista(String flags) {
     List<Widget> list = [
-      SearchBox(),
+      SearchBox(flags: flags),
       Container(
         height: 100,
         child: ListView(
@@ -57,7 +56,8 @@ class VerticalScrollSelecao {
     ];
     List<Produto> produtoList = pegaProdutos();
     for (var i = 0; i < produtoList.length; i++) {
-      if (produtoList[i].tags.contains(flags)) {
+      if (produtoList[i].tags.contains(flags) ||
+          produtoList[i].nome.toLowerCase().contains(flags.toLowerCase())) {
         list.add(Padding(
           padding: const EdgeInsets.all(5.0),
           child: ProdutoCardSelecao(produto: produtoList[i]),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/produto.dart';
+import 'package:ecom_mobile/Model/carrinho.dart';
 
 class DetalhesProdutoPage extends StatefulWidget {
   final Produto produto;
 
-  const DetalhesProdutoPage({Key? key, required this.produto}) : super(key: key);
+  const DetalhesProdutoPage({Key? key, required this.produto})
+      : super(key: key);
 
   @override
   _DetalhesProdutoPageState createState() => _DetalhesProdutoPageState();
@@ -96,9 +98,11 @@ class _DetalhesProdutoPageState extends State<DetalhesProdutoPage> {
             ElevatedButton(
               onPressed: () {
                 // pegar usuario logado
+                Carrinho.addProduto(widget.produto, quantidadeSelecionada);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Adicionado ao carrinho: ${widget.produto.nome} (Quantidade: $quantidadeSelecionada)'),
+                    content: Text(
+                        'Adicionado ao carrinho: ${widget.produto.nome} (Quantidade: $quantidadeSelecionada)'),
                     duration: Duration(seconds: 2),
                   ),
                 );

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ecom_mobile/View/pagina_selecao/pagina_pesquisa.dart';
 
 class SearchBox extends StatelessWidget {
-  SearchBox({super.key, this.onSearch = _defaultOnSearch});
-
-  static void _defaultOnSearch(p0) {
-    print("No");
-  }
+  SearchBox({super.key, this.onSearch = _defaultOnSearch, this.flags});
+  final String? flags;
+  static void _defaultOnSearch(p0) {}
 
   final Function(String) onSearch;
   final TextEditingController _controller = TextEditingController();
@@ -21,13 +20,8 @@ class SearchBox extends StatelessWidget {
               autofocus: ModalRoute.of(context)?.settings.name == '/results',
               controller: _controller,
               decoration: InputDecoration(
-                hintText: " Pesquisar",
+                hintText: null != flags ? flags : " Pesquisar",
               ),
-              onSubmitted: (value) {
-                if (onSearch != null) {
-                  onSearch(value);
-                }
-              },
               onTap: () => {
                 if (ModalRoute.of(context)?.settings.name != '/results')
                   {Navigator.pushNamed(context, '/results')}
@@ -37,10 +31,17 @@ class SearchBox extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Align(
+              alignment: Alignment.centerRight,
               child: GestureDetector(
                 onTap: () {
                   if (onSearch != null) {
-                    onSearch(_controller.text);
+                    Navigator.push(context, MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                      return SelecaoPage(
+                        flag: _controller.text,
+                        usuario: null,
+                      );
+                    }));
                   }
                 },
                 child: Icon(
@@ -48,7 +49,6 @@ class SearchBox extends StatelessWidget {
                   size: 30,
                 ),
               ),
-              alignment: Alignment.centerRight,
             ),
           )
         ],

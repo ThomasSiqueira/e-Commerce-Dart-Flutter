@@ -1,4 +1,5 @@
 import 'package:ecom_mobile/Model/usuario.dart';
+import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
 import 'package:ecom_mobile/View/home/home.dart';
@@ -41,6 +42,10 @@ class SideMenu extends StatelessWidget {
               // Update the state of the app
               // Then close the drawer
               Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute<void>(builder: (BuildContext context) {
+                return CartScreen();
+              }));
             },
           ),
           ListTile(

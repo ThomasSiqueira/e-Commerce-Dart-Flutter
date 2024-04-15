@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
+import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
 
 class SideMenuDeslogado extends StatelessWidget {
   const SideMenuDeslogado({super.key});
@@ -34,6 +35,10 @@ class SideMenuDeslogado extends StatelessWidget {
               // Update the state of the app
               // Then close the drawer
               Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute<void>(builder: (BuildContext context) {
+                return CartScreen();
+              }));
             },
           ),
           ListTile(
