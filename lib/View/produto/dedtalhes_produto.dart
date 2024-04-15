@@ -95,9 +95,7 @@ class _DetalhesProdutoPageState extends State<DetalhesProdutoPage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Lógica para adicionar ao carrinho
-                // Implemente aqui a funcionalidade de adicionar ao carrinho
-                // Exemplo: adicionar ao carrinho e exibir uma mensagem
+                // pegar usuario logado
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Adicionado ao carrinho: ${widget.produto.nome} (Quantidade: $quantidadeSelecionada)'),
