@@ -12,10 +12,8 @@ class CartItemWidget extends StatelessWidget {
     return Dismissible(
       key: ValueKey(index),
       background: Container(
-        color: Theme.of(context).errorColor,
         child: Icon(
           Icons.delete,
-          color: Colors.white,
           size: 40,
         ),
         alignment: Alignment.centerRight,
@@ -53,6 +51,7 @@ class CartItemWidget extends StatelessWidget {
         Carrinho.removeProduto(index);
       },
       child: Card(
+        color: Colors.white,
         margin: EdgeInsets.symmetric(
           horizontal: 15,
           vertical: 4,
@@ -61,15 +60,21 @@ class CartItemWidget extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
+              backgroundColor: const Color.fromARGB(255, 73, 73, 73),
               child: Padding(
                 padding: EdgeInsets.all(5),
-                child: FittedBox(child: Text('${cartItem.produto.precoBase}')),
+                child: FittedBox(
+                    child: Text('${cartItem.produto.precoBase}',
+                        style: TextStyle(fontSize: 20, color: Colors.white))),
               ),
             ),
-            title: Text(cartItem.produto.nome!),
+            title: Text(cartItem.produto.nome!,
+                style: TextStyle(fontSize: 20, color: Colors.black)),
             subtitle: Text(
-                'Total: R\$ ${cartItem.produto.precoBase! * cartItem.quantidade!}'),
-            trailing: Text('${cartItem.quantidade}x'),
+                'Total: R\$ ${cartItem.produto.precoBase! * cartItem.quantidade!}',
+                style: TextStyle(fontSize: 17, color: Colors.black)),
+            trailing: Text('${cartItem.quantidade}x',
+                style: TextStyle(fontSize: 13, color: Colors.black)),
           ),
         ),
       ),
