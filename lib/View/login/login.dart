@@ -2,6 +2,7 @@ import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/register.dart';
+import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -117,22 +118,12 @@ class _LoginPageState extends State<LoginPage> {
                       _errorMessage = '';
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        final usuarioInfo = ObjectBox.usuarioBox
-                            .query(Usuario_.email.equals(_email))
-                            .build()
-                            .findFirst();
 
-                        if (usuarioInfo != null) {
-                          if (_password != usuarioInfo.senha) {
-                            setState(() {
-                              _errorMessage = 'Credenciais inválidas';
-                            });
-                          } else {
-                            //todo: ir para homepage
-                            Navigator.pop(context);
-                            Navigator.pushNamed(context, '/home',
-                                arguments: usuarioInfo);
-                          }
+                        _errorMessage = novoLogin(_email, _password);
+
+                        if (_errorMessage != 'Credenciais inválidas') {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/home');
                         } else {
                           setState(() {
                             _errorMessage = 'Credenciais inválidas';

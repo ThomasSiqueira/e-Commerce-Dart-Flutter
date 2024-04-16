@@ -3,6 +3,8 @@ import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
 import 'package:ecom_mobile/View/home/home.dart';
+import 'package:ecom_mobile/View/historico_compras.dart';
+import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
 
 class SideMenu extends StatelessWidget {
   final Usuario usuario;
@@ -49,10 +51,23 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
+            title: const Text('Minhas Compras'),
+            onTap: () {
+              // Update the state of the app
+              // Then close the drawer
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute<void>(builder: (BuildContext context) {
+                return OrdersScreen();
+              }));
+            },
+          ),
+          ListTile(
             title: const Text('Logout'),
             onTap: () {
               // Update the state of the app
               // Then close the drawer
+              logout();
               Navigator.push(context,
                   MaterialPageRoute<void>(builder: (BuildContext context) {
                 return HomePage(usuario: null);

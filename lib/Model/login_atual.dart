@@ -10,4 +10,5 @@ class CondicaoLogin {
   static logout() {
     usuario = null;
   }
+  
 }
