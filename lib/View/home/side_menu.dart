@@ -71,7 +71,7 @@ class SideMenu extends StatelessWidget {
               // Update the state of the app
               // Then close the drawer
               logout();
-              Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+              Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
             },
           ),
         ],

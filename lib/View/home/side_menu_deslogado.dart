@@ -49,7 +49,7 @@ class SideMenuDeslogado extends StatelessWidget {
             onTap: () {
               // Update the state of the app
               // Then close the drawer
-              Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+              Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
             },
           ),
         ],
