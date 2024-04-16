@@ -35,6 +35,7 @@ class SearchBox extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (onSearch != null) {
+                    Navigator.pop(context);
                     Navigator.push(context, MaterialPageRoute<void>(
                         builder: (BuildContext context) {
                       return SelecaoPage(

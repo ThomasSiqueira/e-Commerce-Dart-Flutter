@@ -37,6 +37,9 @@ class SideMenu extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Home'),
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+            },
           ),
           ListTile(
             title: const Text('Carrinho'),
@@ -68,10 +71,7 @@ class SideMenu extends StatelessWidget {
               // Update the state of the app
               // Then close the drawer
               logout();
-              Navigator.push(context,
-                  MaterialPageRoute<void>(builder: (BuildContext context) {
-                return HomePage(usuario: null);
-              }));
+              Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
             },
           ),
         ],
