@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
-                        _errorMessage = novoLogin(_email, _password);
+                        _errorMessage = novoLogin(_email, _password) as String;
 
                         if (_errorMessage != 'Credenciais inválidas') {
                           Navigator.pop(context);

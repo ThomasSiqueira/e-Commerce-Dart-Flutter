@@ -1,4 +1,7 @@
+import 'package:ecom_mobile/View/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<String> novoLogin(String _email, String _password) async {
   String _errorMessage = '';
@@ -21,6 +24,20 @@ Future<String> novoLogin(String _email, String _password) async {
 
   return _errorMessage;
 }
+
+Future<String?> validateEmailBeingUsed(String email) async {
+    // Verifica se o email já existe antes de adicionar o usuário ao Firestore
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      return 'Este email já está em uso. Por favor, use outro email.';
+    }
+
+    return null;
+  }
 
 void logout() {
     FirebaseAuth.instance.signOut();

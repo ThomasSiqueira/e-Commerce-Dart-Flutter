@@ -3,8 +3,10 @@ import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/adiciona_usuarios.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
+import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -29,6 +31,7 @@ class _SignupPageState extends State<SignupPage> {
   String _email = '';
   String _password = '';
   String _confirmPassword = '';
+  bool _emailInUse = false;
 
   Future<void> _showSuccessDialog() async {
     return showDialog(
@@ -137,17 +140,7 @@ class _SignupPageState extends State<SignupPage> {
                             return 'Por favor, insira seu email';
                           } else if (!value.isValidEmail()) {
                             return "Por favor, insira um email válido";
-                          }
-
-                          final emailExiste = ObjectBox.usuarioBox
-                              .query(Usuario_.email.equals(value))
-                              .build()
-                              .findFirst();
-
-                          if (emailExiste != null) {
-                            return "Email em uso. Use outro email";
-                          }
-
+                          } 
                           return null;
                         },
                       ),
@@ -208,33 +201,45 @@ class _SignupPageState extends State<SignupPage> {
                     ],
                   ),
                   Container(
-
                     padding: const EdgeInsets.only(top: 3, left: 3),
-                    child: ElevatedButton(
+                    child:  ElevatedButton(
                       onPressed: () async {
-                      
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
 
-                          CollectionReference collRef = FirebaseFirestore.instance.collection('user');
-                         try {
-                          await collRef.add({
-                            'name': nameController.text,
-                            'email': emailController.text,
-                            'password': passwordController.text,
-                          });
-                        } catch (e) {
-                          print("Error");
-                        }
-
-                          final newUser = Usuario(
-                            nome: _username,
-                            email: _email,
-                            senha: _password,
-                          );
-                          adicionaUsuario(newUser);
-
-                          await _showSuccessDialog();
+                          String? emailError = await validateEmailBeingUsed(_email);
+                          if (emailError != null) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Erro de Cadastro'),
+                                  content: Text(emailError),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(); 
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            CollectionReference collRef =
+                                FirebaseFirestore.instance.collection('user');
+                            try {
+                              await collRef.add({
+                                'name': nameController.text,
+                                'email': emailController.text,
+                                'password': passwordController.text,
+                              });
+                            } catch (e) {
+                              print("Error");
+                            }
+                            await _showSuccessDialog();
+                          }
                         }
                       },
                       child: const Text(
