@@ -31,7 +31,6 @@ class _SignupPageState extends State<SignupPage> {
   String _email = '';
   String _password = '';
   String _confirmPassword = '';
-  bool _emailInUse = false;
 
   Future<void> _showSuccessDialog() async {
     return showDialog(
@@ -66,6 +65,7 @@ class _SignupPageState extends State<SignupPage> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -103,12 +103,8 @@ class _SignupPageState extends State<SignupPage> {
                         controller: nameController,
                         decoration: InputDecoration(
                             hintText: "Nome",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: BorderSide.none),
-                            fillColor: Color.fromARGB(255, 136, 129, 137)
-                                .withOpacity(0.1),
-                            filled: true,
+                            border: OutlineInputBorder(),
+                            filled: false,
                             prefixIcon: const Icon(Icons.person)),
                         onChanged: (value) {
                           _username = value;
@@ -125,12 +121,8 @@ class _SignupPageState extends State<SignupPage> {
                         controller: emailController,
                         decoration: InputDecoration(
                             hintText: "Email",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: BorderSide.none),
-                            fillColor: Color.fromARGB(255, 136, 129, 137)
-                                .withOpacity(0.1),
-                            filled: true,
+                            border: OutlineInputBorder(),
+                            filled: false,
                             prefixIcon: const Icon(Icons.email)),
                         onChanged: (value) {
                           _email = value;
@@ -149,12 +141,8 @@ class _SignupPageState extends State<SignupPage> {
                         controller: passwordController,
                         decoration: InputDecoration(
                           hintText: "Senha",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide.none),
-                          fillColor: Color.fromARGB(255, 136, 129, 137)
-                              .withOpacity(0.1),
-                          filled: true,
+                          border: OutlineInputBorder(),
+                          filled: false,
                           prefixIcon: const Icon(Icons.password),
                         ),
                         obscureText: true,
@@ -176,18 +164,13 @@ class _SignupPageState extends State<SignupPage> {
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: "Confirmar Senha",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide.none),
-                          fillColor: Color.fromARGB(255, 136, 129, 137)
-                              .withOpacity(0.1),
-                          filled: true,
+                          border: OutlineInputBorder(),
+                          filled: false,
                           prefixIcon: const Icon(Icons.password),
                         ),
                         obscureText: true,
                         onChanged: (value) {
                           _confirmPassword = value;
-                          print("confirmed:: $_confirmPassword");
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -249,7 +232,7 @@ class _SignupPageState extends State<SignupPage> {
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.black,
                       ),
                     ),
                   ),

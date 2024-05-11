@@ -26,7 +26,6 @@ Future<String> novoLogin(String _email, String _password) async {
 }
 
 Future<String?> validateEmailBeingUsed(String email) async {
-    // Verifica se o email já existe antes de adicionar o usuário ao Firestore
     final querySnapshot = await FirebaseFirestore.instance
         .collection('user')
         .where('email', isEqualTo: email)
