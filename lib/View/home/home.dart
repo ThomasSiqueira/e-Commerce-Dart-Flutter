@@ -3,6 +3,7 @@ import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/ViewModel/vertical_scroll_itens.dart';
 import 'package:ecom_mobile/View/home/side_menu.dart';
 import 'package:ecom_mobile/View/home/side_menu_deslogado.dart';
+//joao
 
 class HomePage extends StatelessWidget {
   final Usuario? usuario; // Usuário recebido como parâmetro

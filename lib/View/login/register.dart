@@ -2,8 +2,11 @@ import 'package:ecom_mobile/Model/open_database.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/adiciona_usuarios.dart';
 import 'package:ecom_mobile/objectbox.g.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 extension EmailValidator on String {
   bool isValidEmail() {
@@ -54,6 +57,10 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -90,6 +97,7 @@ class _SignupPageState extends State<SignupPage> {
                   Column(
                     children: <Widget>[
                       TextFormField(
+                        controller: nameController,
                         decoration: InputDecoration(
                             hintText: "Nome",
                             border: OutlineInputBorder(
@@ -111,6 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             hintText: "Email",
                             border: OutlineInputBorder(
@@ -144,6 +153,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                           hintText: "Senha",
                           border: OutlineInputBorder(
@@ -198,11 +208,24 @@ class _SignupPageState extends State<SignupPage> {
                     ],
                   ),
                   Container(
+
                     padding: const EdgeInsets.only(top: 3, left: 3),
                     child: ElevatedButton(
                       onPressed: () async {
+                      
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
+
+                          CollectionReference collRef = FirebaseFirestore.instance.collection('user');
+                         try {
+                          await collRef.add({
+                            'name': nameController.text,
+                            'email': emailController.text,
+                            'password': passwordController.text,
+                          });
+                        } catch (e) {
+                          print("Error");
+                        }
 
                           final newUser = Usuario(
                             nome: _username,

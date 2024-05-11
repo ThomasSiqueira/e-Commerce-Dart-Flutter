@@ -50,17 +50,17 @@ init() async {
       tags: ['Eletrodomesticos', 'Promocoes'],
       imagem: 'assets/Produtos/brastemp_375L.jpg');
 
-  /* Produto produto5 = Produto(
+   Produto produto5 = Produto(
       nome: "POCO C65 8GB+256GB",
       precoBase: 879.00,
       tags: ['Promocao', 'MaisVendidos', 'Celular'],
-      imagem: 'assets/Produtos/poco65.jpg');
+      imagem: 'assets/Produtos/pococ65.jpg');
 
   Produto produto6 = Produto(
       nome: "Xiaomi Redmi 12",
       precoBase: 998.00,
       tags: ['Celular'],
-      imagem: 'assets/Produtos/redmi12.webp'); */
+      imagem: 'assets/Produtos/redmi12.webp'); 
 
 ///////////////////
 
@@ -75,10 +75,10 @@ init() async {
 
   //produtoBox.put(produto);
   //produtoBox.put(produto2);
-  //produtoBox.put(produto3);
-  //produtoBox.put(produto4);
+  // produtoBox.remove(j);
+  // produtoBox.remove(produto6);
 
-  //produtoBox.remove(11);
+  // produtoBox.remove(10);
 
   for (Produto produto in produtos) {
     print(produto.id);
