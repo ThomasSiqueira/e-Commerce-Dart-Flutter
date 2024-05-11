@@ -46,6 +46,7 @@ dependencies:
   objectbox_flutter_libs: any
   objectbox: ^1.7.0
   firebase_core: ^2.31.0
+  firebase_auth: ^4.19.5
 
 dev_dependencies:
   build_runner: ^2.4.9

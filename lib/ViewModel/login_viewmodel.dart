@@ -1,32 +1,27 @@
-import 'package:ecom_mobile/Model/open_database.dart';
-import 'package:ecom_mobile/objectbox.g.dart';
-import 'package:ecom_mobile/Model/login_atual.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-String novoLogin(
-  _email,
-  _password,
-) {
+Future<String> novoLogin(String _email, String _password) async {
   String _errorMessage = '';
 
-  final usuarioInfo = ObjectBox.usuarioBox
-      .query(Usuario_.email.equals(_email))
-      .build()
-      .findFirst();
-
-  if (usuarioInfo != null) {
-    if (_password != usuarioInfo.senha) {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _email,
+      password: _password,
+    );
+    
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found' || e.code == 'wrong-password') {
       _errorMessage = 'Credenciais inválidas';
+    } else {
+      _errorMessage = 'Erro ao autenticar: ${e.message}';
     }
-    {
-      CondicaoLogin.login(usuarioInfo);
-    }
-  } else {
-    _errorMessage = 'Credenciais inválidas';
+  } catch (e) {
+    _errorMessage = 'Erro ao autenticar: $e';
   }
 
   return _errorMessage;
 }
 
 void logout() {
-  CondicaoLogin.logout();
+    FirebaseAuth.instance.signOut();
 }
