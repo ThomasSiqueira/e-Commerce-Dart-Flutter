@@ -4,7 +4,7 @@ import 'package:ecom_mobile/ViewModel/horizontal_scroll_itens.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_list.dart';
 
 class VerticalScrollList {
-  static List<Widget> criaLista() {
+  static List<Widget> criaLista(BuildContext context) {
     List<String> titulo = [
       'Promoções',
       'Mais Vendidos',
@@ -40,7 +40,7 @@ class VerticalScrollList {
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          children: HorizontalScrollItens.criaLista(flag[i]),
+          children: HorizontalScrollItens.criaLista(context, flag[i]),
         ),
       ));
     }

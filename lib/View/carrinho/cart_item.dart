@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
+import 'package:provider/provider.dart';
 
 class CartItemWidget extends StatelessWidget {
   final ProdutoCarrinho cartItem;
@@ -9,6 +10,7 @@ class CartItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var carrinho = Provider.of<Carrinho>(context, listen: false);
     return Dismissible(
       key: ValueKey(index),
       background: Container(
@@ -48,7 +50,7 @@ class CartItemWidget extends StatelessWidget {
         );
       },
       onDismissed: (_) {
-        Carrinho.removeProduto(index);
+        carrinho.removeProduto(index);
       },
       child: Card(
         color: Colors.white,

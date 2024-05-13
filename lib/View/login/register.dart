@@ -1,13 +1,6 @@
-import 'package:ecom_mobile/Model/open_database.dart';
-import 'package:ecom_mobile/Model/usuario.dart';
-import 'package:ecom_mobile/Model/adiciona_usuarios.dart';
-import 'package:ecom_mobile/objectbox.g.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 extension EmailValidator on String {
@@ -132,7 +125,7 @@ class _SignupPageState extends State<SignupPage> {
                             return 'Por favor, insira seu email';
                           } else if (!value.isValidEmail()) {
                             return "Por favor, insira um email válido";
-                          } 
+                          }
                           return null;
                         },
                       ),
@@ -185,12 +178,13 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 3, left: 3),
-                    child:  ElevatedButton(
+                    child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
 
-                          String? emailError = await validateEmailBeingUsed(_email);
+                          String? emailError =
+                              await validateEmailBeingUsed(_email);
                           if (emailError != null) {
                             showDialog(
                               context: context,
@@ -201,7 +195,7 @@ class _SignupPageState extends State<SignupPage> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context).pop(); 
+                                        Navigator.of(context).pop();
                                       },
                                       child: Text('OK'),
                                     ),

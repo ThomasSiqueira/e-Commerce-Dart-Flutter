@@ -1,5 +1,3 @@
-import 'package:objectbox/objectbox.dart';
-import 'package:ecom_mobile/Model/produto.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 
 class Compra {

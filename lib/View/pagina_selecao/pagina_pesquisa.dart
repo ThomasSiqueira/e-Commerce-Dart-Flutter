@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/produto.dart';
-import 'package:ecom_mobile/Model/produtos_database.dart';
 import 'package:ecom_mobile/ViewModel/produto_card_selecao.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/View/home/side_menu.dart';
@@ -19,9 +18,7 @@ class SelecaoPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("E-Commerce"),
       ),
-      drawer: usuario == null
-          ? const SideMenuDeslogado()
-          : SideMenu(usuario: usuario!),
+      drawer: usuario == null ? const SideMenuDeslogado() : SideMenu(),
       body: Padding(
         padding: const EdgeInsets.all(7.0),
         child: NestedScrollView(
@@ -54,9 +51,9 @@ class VerticalScrollSelecao {
         ),
       ),
     ];
-    List<Produto> produtoList = pegaProdutos();
+    List<Produto> produtoList = [];
     for (var i = 0; i < produtoList.length; i++) {
-      if (produtoList[i].tags.contains(flags) ||
+      if (produtoList[i].tags!.contains(flags) ||
           produtoList[i].nome.toLowerCase().contains(flags.toLowerCase())) {
         list.add(Padding(
           padding: const EdgeInsets.all(5.0),

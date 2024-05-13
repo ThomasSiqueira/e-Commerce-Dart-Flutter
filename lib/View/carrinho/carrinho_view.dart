@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:ecom_mobile/View/carrinho/cart_item.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _CartCreateState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var carrinho = Provider.of<Carrinho>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrinho'),
@@ -35,7 +37,7 @@ class _CartCreateState extends State<CartScreen> {
                   SizedBox(width: 10),
                   Chip(
                     backgroundColor: Color.fromARGB(255, 70, 70, 70),
-                    label: Text('R\$${Carrinho.getTotal().toStringAsFixed(2)}'),
+                    label: Text('R\$${carrinho.getTotal().toStringAsFixed(2)}'),
                   ),
                   Spacer(),
                   OrderButtom(),
@@ -48,14 +50,15 @@ class _CartCreateState extends State<CartScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: Carrinho.getProdutos().length,
+              itemCount: carrinho.getProdutos().length,
               itemBuilder: (ctx, index) =>
-                  CartItemWidget(Carrinho.getProdutos()[index], index),
+                  CartItemWidget(carrinho.getProdutos()[index], index),
             ),
           ),
         ],
       ),
       floatingActionButton: DialogCarrinho(
+        carrinho: carrinho,
         notifyParent: cartState,
       ),
     );
@@ -86,7 +89,9 @@ class _OrderButtomState extends State<OrderButtom> {
 
 class DialogCarrinho extends StatelessWidget {
   final Function() notifyParent;
-  const DialogCarrinho({super.key, required this.notifyParent});
+  final Carrinho carrinho;
+  const DialogCarrinho(
+      {super.key, required this.carrinho, required this.notifyParent});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +109,7 @@ class DialogCarrinho extends StatelessWidget {
             TextButton(
               onPressed: () => {
                 Navigator.pop(context),
-                Carrinho.limpaCarrinho(),
+                carrinho.limpaCarrinho(),
                 notifyParent()
               },
               child: const Text('Sim'),

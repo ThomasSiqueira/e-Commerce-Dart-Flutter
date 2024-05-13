@@ -1,8 +1,8 @@
-import 'package:ecom_mobile/Model/open_database.dart';
-import 'package:ecom_mobile/objectbox.g.dart';
+import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/login/register.dart';
 import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -118,20 +118,22 @@ class _LoginPageState extends State<LoginPage> {
                       _errorMessage = '';
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+                        CondicaoLogin condLogin =
+                            Provider.of<CondicaoLogin>(context, listen: false);
+                        _errorMessage = await novoLogin(
+                            context, _email, _password, condLogin);
 
-                        _errorMessage = novoLogin(_email, _password) as String;
-
-                        if (_errorMessage != 'Credenciais inválidas') {
+                        if (_errorMessage == '') {
                           Navigator.pop(context);
                           Navigator.pushNamed(context, '/home');
                         } else {
                           setState(() {
-                            _errorMessage = 'Credenciais inválidas';
+                            _errorMessage;
                           });
                         }
                       }
                     },
-                    child: const Text('Login'),
+                    child: const Text('Logiin'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,

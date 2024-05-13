@@ -1,16 +1,33 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-@Entity()
 class Usuario {
-  @Id()
-  int? id;
+  final String id;
   final String nome;
-  final String senha;
   final String email;
 
-  Usuario(
-      {this.id,
-      required this.nome,
-      required this.senha,
-      required this.email});
+  Usuario({required this.id, required this.nome, required this.email});
+}
+
+class CondicaoLogin extends ChangeNotifier {
+  Usuario? usuario;
+  CollectionReference? users;
+
+  CondicaoLogin() {
+    users = FirebaseFirestore.instance.collection('user');
+  }
+
+  login(Usuario user) {
+    usuario = user;
+    notifyListeners();
+  }
+
+  logout() {
+    usuario = null;
+    notifyListeners();
+  }
+
+  isLogado() {
+    return usuario != null ? true : false;
+  }
 }

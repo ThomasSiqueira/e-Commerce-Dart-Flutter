@@ -6,8 +6,8 @@ import 'package:ecom_mobile/View/home/side_menu_deslogado.dart';
 //joao
 
 class HomePage extends StatelessWidget {
-  final Usuario? usuario; // Usuário recebido como parâmetro
-  const HomePage({super.key, required this.usuario});
+  final CondicaoLogin condLogin; // Usuário recebido como parâmetro
+  const HomePage({super.key, required this.condLogin});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("E-Commerce"),
       ),
-      drawer: usuario == null
-          ? const SideMenuDeslogado()
-          : SideMenu(usuario: usuario!),
+      drawer: SideMenu(),
       body: Padding(
         padding: const EdgeInsets.all(7.0),
         child: NestedScrollView(
@@ -27,7 +25,7 @@ class HomePage extends StatelessWidget {
           scrollDirection: Axis.vertical,
           body: SingleChildScrollView(
             child: Column(
-              children: VerticalScrollList.criaLista(),
+              children: VerticalScrollList.criaLista(context),
             ),
           ),
         ),
