@@ -3,7 +3,6 @@ import 'package:ecom_mobile/Model/produto.dart';
 import 'package:ecom_mobile/ViewModel/produto_card_selecao.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/View/home/side_menu.dart';
-import 'package:ecom_mobile/View/home/side_menu_deslogado.dart';
 import 'package:ecom_mobile/widgets/search_bar.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_list.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +19,7 @@ class SelecaoPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("E-Commerce"),
       ),
-      drawer: usuario == null ? const SideMenuDeslogado() : SideMenu(),
+      drawer: SideMenu(),
       body: Padding(
         padding: const EdgeInsets.all(7.0),
         child: NestedScrollView(

@@ -1,3 +1,5 @@
+import 'package:ecom_mobile/Model/carrinho.dart';
+import 'package:ecom_mobile/Model/produto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
@@ -12,6 +14,7 @@ Future<String> novoLogin(BuildContext context, String email, String password,
 
   CollectionReference users =
       Provider.of<CondicaoLogin>(context, listen: false).users!;
+
   try {
     final user = users.where("email", isEqualTo: email);
     final userData = (await user.get()).docs[0];
@@ -21,6 +24,10 @@ Future<String> novoLogin(BuildContext context, String email, String password,
   } catch (e) {
     print('Erro ao autenticar: $e');
   }
+
+  Provider.of<Carrinho>(context, listen: false).initCarrinho(
+      Provider.of<CondicaoLogin>(context, listen: false),
+      Provider.of<ListaProdutos>(context, listen: false));
 
   return errorMessage;
 }

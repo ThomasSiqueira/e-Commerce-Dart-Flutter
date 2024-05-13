@@ -27,7 +27,7 @@ class SideMenu extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                UserSideMenu(),
+                const UserSideMenu(),
                 Center(
                     child: user.isLogado()
                         ? Text(user.usuario!.nome.toUpperCase(),

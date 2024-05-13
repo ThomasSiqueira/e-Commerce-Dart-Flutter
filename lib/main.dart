@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:ecom_mobile/Model/produto.dart';
@@ -9,7 +7,6 @@ import 'package:ecom_mobile/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
-import 'package:ecom_mobile/Model/init_database.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -18,17 +15,24 @@ void main() async {
 
   ListaProdutos produtos = await ListaProdutos.create();
   CondicaoLogin users = CondicaoLogin();
+  Carrinho carrinho = Carrinho();
 
   runApp(MainApp(
     produtos: produtos,
     users: users,
+    carrinho: carrinho,
   ));
 }
 
 class MainApp extends StatelessWidget {
   final ListaProdutos produtos;
   final CondicaoLogin users;
-  const MainApp({super.key, required this.produtos, required this.users});
+  final Carrinho carrinho;
+  const MainApp(
+      {super.key,
+      required this.produtos,
+      required this.users,
+      required this.carrinho});
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -36,7 +40,7 @@ class MainApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => users),
           ChangeNotifierProvider(create: (context) => produtos),
           ChangeNotifierProvider(
-              create: (context) => Carrinho()), // other providers
+              create: (context) => carrinho), // other providers
         ],
         builder: (context, child) => MaterialApp(
               debugShowCheckedModeBanner: false,

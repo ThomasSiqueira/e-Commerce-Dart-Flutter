@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/produto.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
@@ -99,8 +100,11 @@ class _DetalhesProdutoPageState extends State<DetalhesProdutoPage> {
             ElevatedButton(
               onPressed: () {
                 // pegar usuario logado
+                CondicaoLogin user =
+                    Provider.of<CondicaoLogin>(context, listen: false);
                 Provider.of<Carrinho>(context, listen: false)
-                    .addProduto(widget.produto, quantidadeSelecionada);
+                    .addProduto(widget.produto, quantidadeSelecionada, user);
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(

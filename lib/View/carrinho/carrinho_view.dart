@@ -1,3 +1,4 @@
+import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:ecom_mobile/View/carrinho/cart_item.dart';
@@ -16,6 +17,8 @@ class _CartCreateState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     var carrinho = Provider.of<Carrinho>(context, listen: false);
+    var user = Provider.of<CondicaoLogin>(context, listen: false);
+    Future<List<ProdutoCarrinho>> getProdutos = carrinho.getProdutos(user);
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrinho'),
@@ -49,11 +52,25 @@ class _CartCreateState extends State<CartScreen> {
             height: 10,
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: carrinho.getProdutos().length,
-              itemBuilder: (ctx, index) =>
-                  CartItemWidget(carrinho.getProdutos()[index], index),
-            ),
+            child: user.isLogado()
+                ? FutureBuilder(
+                    future: getProdutos,
+                    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                      if (snapshot.data != null) {
+                        return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (ctx, index) =>
+                              CartItemWidget((snapshot.data!)[index], index),
+                        );
+                      } else {
+                        return ListView();
+                      }
+                    })
+                : ListView.builder(
+                    itemCount: 0,
+                    itemBuilder: (ctx, index) =>
+                        CartItemWidget(([])[index], index),
+                  ),
           ),
         ],
       ),

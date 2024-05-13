@@ -1,50 +1,115 @@
 import 'package:ecom_mobile/Model/produto.dart';
-import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
+import 'package:ecom_mobile/Model/usuario.dart';
 
 class Carrinho extends ChangeNotifier {
-  List<ProdutoCarrinho> lista = [];
+  List<ProdutoCarrinho> _lista = [];
+  late CollectionReference carrinho;
 
-  attCarrinho(
-    context,
-  ) async {
-    CondicaoLogin user = Provider.of<CondicaoLogin>(context, listen: false);
+  Carrinho() {
+    carrinho = (FirebaseFirestore.instance.collection('carrinho'));
+  }
+
+  initCarrinho(user, ListaProdutos produtos) async {
     if (user.isLogado()) {
-      CollectionReference carrinho =
-          (FirebaseFirestore.instance.collection('carrinho'));
+      print(user.usuario!.id);
+      List<QueryDocumentSnapshot<Object?>> data = (await (carrinho
+              .where("user", isEqualTo: user.usuario!.id)
+              .limit(1)
+              .get()))
+          .docs;
+
+      for (var valor in data) {
+        var p = valor.data() as Map;
+        for (var entrada in p["itens"]) {
+          for (var item in produtos.produtos) {
+            if (item.id == entrada["item"]) {
+              print(entrada["item"]);
+              print(entrada["quantidade"]);
+              _lista.add(
+                ProdutoCarrinho(
+                    produto: item, quantidade: entrada["quantidade"]),
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+
+  attCarrinho(user) async {
+    if (user.isLogado()) {
+      print(user.usuario!.id);
       (carrinho.where("user", isEqualTo: user.usuario!.id).limit(1).get())
           .then((QuerySnapshot snapshot) {
-        var batch = FirebaseFirestore.instance.batch();
-        final post = snapshot.docs[0].reference;
+        if (snapshot.size < 1) {
+          try {
+            carrinho.add({
+              "user": user.usuario!.id,
+              "itens": {
+                for (var item in _lista)
+                  {"item": item.produto.id, "quantidade": item.quantidade}
+              }
+            });
 
-        batch.update(post, {});
+            print("Tentando2");
+          } catch (e) {
+            print("Error");
+          }
+        } else {
+          print("Tentando3");
+          var batch = FirebaseFirestore.instance.batch();
+          final post = snapshot.docs[0].reference;
+          try {
+            batch.update(post, {
+              "itens": {
+                for (var item in _lista)
+                  {"item": item.produto.id, "quantidade": item.quantidade}
+              }
+            });
+            batch.commit().then(
+                  (value) => print("value"),
+                );
+          } catch (e) {
+            print("Error");
+          }
+        }
       });
     }
   }
 
-  addProduto(Produto produto, int quantidade) {
+  addProduto(Produto produto, int quantidade, CondicaoLogin user) {
     ProdutoCarrinho p =
         ProdutoCarrinho(produto: produto, quantidade: quantidade);
-    lista.add(p);
+    bool existe = false;
+    for (ProdutoCarrinho item in _lista) {
+      if (item.produto.id == produto.id) {
+        item.quantidade += quantidade;
+        existe = true;
+      }
+    }
+    if (!existe) {
+      _lista.add(p);
+    }
+    attCarrinho(user);
   }
 
   removeProduto(int i) {
-    lista.remove(lista[i]);
+    _lista.remove(_lista[i]);
   }
 
   limpaCarrinho() {
-    lista.clear();
+    _lista.clear();
   }
 
-  List<ProdutoCarrinho> getProdutos() {
-    return lista;
+  Future<List<ProdutoCarrinho>> getProdutos(user) async {
+    return _lista;
   }
 
   double getTotal() {
     double total = 0;
-    for (ProdutoCarrinho p in lista) {
+    for (ProdutoCarrinho p in _lista) {
       total += p.produto.precoBase * p.quantidade;
     }
 
@@ -54,6 +119,6 @@ class Carrinho extends ChangeNotifier {
 
 class ProdutoCarrinho {
   final Produto produto;
-  final int quantidade;
+  int quantidade;
   ProdutoCarrinho({required this.produto, required this.quantidade});
 }
