@@ -112,6 +112,7 @@ class DialogCarrinho extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<CondicaoLogin>(context, listen: false);
     return TextButton(
       onPressed: () => showDialog<String>(
         context: context,
@@ -126,7 +127,7 @@ class DialogCarrinho extends StatelessWidget {
             TextButton(
               onPressed: () => {
                 Navigator.pop(context),
-                carrinho.limpaCarrinho(),
+                carrinho.limpaCarrinho(user),
                 notifyParent()
               },
               child: const Text('Sim'),

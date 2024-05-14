@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 
 class Carrinho extends ChangeNotifier {
-  List<ProdutoCarrinho> _lista = [];
+  final List<ProdutoCarrinho> _lista = [];
   late CollectionReference carrinho;
 
   Carrinho() {
@@ -95,12 +95,14 @@ class Carrinho extends ChangeNotifier {
     attCarrinho(user);
   }
 
-  removeProduto(int i) {
+  removeProduto(int i, CondicaoLogin user) {
     _lista.remove(_lista[i]);
+    attCarrinho(user);
   }
 
-  limpaCarrinho() {
+  limpaCarrinho(CondicaoLogin user) {
     _lista.clear();
+    attCarrinho(user);
   }
 
   Future<List<ProdutoCarrinho>> getProdutos(user) async {

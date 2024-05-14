@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/View/pagina_selecao/pagina_pesquisa.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ecom_mobile/Model/searchState.dart';

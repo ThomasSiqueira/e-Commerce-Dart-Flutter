@@ -24,6 +24,9 @@ class _SignupPageState extends State<SignupPage> {
   String _email = '';
   String _password = '';
   String _confirmPassword = '';
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   Future<void> _showSuccessDialog() async {
     return showDialog(
@@ -52,10 +55,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
@@ -94,11 +93,11 @@ class _SignupPageState extends State<SignupPage> {
                     children: <Widget>[
                       TextFormField(
                         controller: nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "Nome",
                             border: OutlineInputBorder(),
                             filled: false,
-                            prefixIcon: const Icon(Icons.person)),
+                            prefixIcon: Icon(Icons.person)),
                         onChanged: (value) {
                           _username = value;
                         },
@@ -112,11 +111,11 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "Email",
                             border: OutlineInputBorder(),
                             filled: false,
-                            prefixIcon: const Icon(Icons.email)),
+                            prefixIcon: Icon(Icons.email)),
                         onChanged: (value) {
                           _email = value;
                         },
@@ -179,56 +178,55 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     padding: const EdgeInsets.only(top: 3, left: 3),
                     child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
 
-                          String? emailError =
-                              await validateEmailBeingUsed(_email);
-                          if (emailError != null) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Erro de Cadastro'),
-                                  content: Text(emailError),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } else {
-                            CollectionReference collRef =
-                                FirebaseFirestore.instance.collection('user');
-                            try {
-                              await collRef.add({
-                                'name': nameController.text,
-                                'email': emailController.text,
-                                'password': passwordController.text,
-                              });
-                            } catch (e) {
-                              print("Error");
+                            String? emailError =
+                                await validateEmailBeingUsed(_email);
+                            if (emailError != null) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Erro de Cadastro'),
+                                    content: Text(emailError),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              CollectionReference collRef =
+                                  FirebaseFirestore.instance.collection('user');
+                              try {
+                                await collRef.add({
+                                  'name': nameController.text,
+                                  'email': emailController.text,
+                                  'password': passwordController.text,
+                                });
+                              } catch (e) {
+                                print("Error");
+                              }
+                              await _showSuccessDialog();
                             }
-                            await _showSuccessDialog();
                           }
-                        }
-                      },
-                      child: const Text(
-                        "Confirmar",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.black,
-                      ),
-                    ),
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          backgroundColor: Colors.black,
+                        ),
+                        child: const Text(
+                          "Confirmar",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        )),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -239,7 +237,7 @@ class _SignupPageState extends State<SignupPage> {
                             Navigator.pop(context);
                             Navigator.push(context, MaterialPageRoute<void>(
                                 builder: (BuildContext context) {
-                              return LoginPage();
+                              return const LoginPage();
                             }));
                           },
                           child: const Text(

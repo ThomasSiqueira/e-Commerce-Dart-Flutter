@@ -3,6 +3,7 @@ import 'package:ecom_mobile/Model/produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
+import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:provider/provider.dart';
 
 Future<String> novoLogin(BuildContext context, String email, String password,
@@ -46,5 +47,7 @@ Future<String?> validateEmailBeingUsed(String email) async {
 
 void logout(BuildContext context) {
   CondicaoLogin user = Provider.of<CondicaoLogin>(context, listen: false);
+  Carrinho carrinho = Provider.of<Carrinho>(context, listen: false);
   user.logout();
+  carrinho.limpaCarrinho(user);
 }
