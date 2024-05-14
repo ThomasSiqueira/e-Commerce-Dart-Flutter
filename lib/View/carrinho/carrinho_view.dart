@@ -55,18 +55,11 @@ class _CartCreateState extends State<CartScreen> {
               height: 10,
             ),
             Expanded(
-              child: user.isLogado()
-                  ? ListView.builder(
-                      itemCount: getProdutos.length,
-                      itemBuilder: (ctx, index) =>
-                          CartItemWidget((getProdutos)[index], index),
-                    )
-                  : ListView.builder(
-                      itemCount: 0,
-                      itemBuilder: (ctx, index) =>
-                          CartItemWidget(([])[index], index),
-                    ),
-            ),
+                child: ListView.builder(
+              itemCount: getProdutos.length,
+              itemBuilder: (ctx, index) =>
+                  CartItemWidget((getProdutos)[index], index),
+            )),
           ],
         ),
         floatingActionButton: DialogCarrinho(
@@ -95,15 +88,49 @@ class _OrderButtomState extends State<OrderButtom> {
     var produtos = Provider.of<ListaProdutos>(context, listen: false);
     var carrinho = Provider.of<Carrinho>(context, listen: false);
     return TextButton(
-      child: Text(
-        'COMPRAR',
-        style: TextStyle(color: Colors.black),
-      ),
-      onPressed: () => {
-        compras.novaCompra(user, carrinho.getProdutos(user), produtos),
-        carrinho.limpaCarrinho(user)
-      },
-    );
+        child: Text(
+          'COMPRAR',
+          style: TextStyle(color: Colors.black),
+        ),
+        onPressed: () => user.isLogado()
+            ? showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Comfirme sua compra!'),
+                  content:
+                      const Text('Tem certeza que deseja finalizar a compra?'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => {Navigator.pop(context)},
+                      child: const Text('Cancelar'),
+                    ),
+                    TextButton(
+                      onPressed: () => {
+                        Navigator.pop(context),
+                        compras.novaCompra(
+                            user, carrinho.getProdutos(user), produtos),
+                        carrinho.limpaCarrinho(user),
+                        _showSuccessDialog(context)
+                      },
+                      child: const Text('Sim'),
+                    ),
+                  ],
+                ),
+              )
+            : showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Center(child: Text('Calma!')),
+                  content:
+                      const Text('Voce precisa estar logado para comprar!'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => {Navigator.pop(context)},
+                      child: const Text('Sair'),
+                    ),
+                  ],
+                ),
+              ));
   }
 }
 
@@ -141,4 +168,25 @@ class DialogCarrinho extends StatelessWidget {
       child: const Text('Esvaziar carrinho'),
     );
   }
+}
+
+_showSuccessDialog(context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Compra Concluído'),
+        content: Text('Compra realizado com sucesso!'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              ;
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
 }
