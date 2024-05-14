@@ -12,91 +12,94 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<CondicaoLogin>(context, listen: false);
-    return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
-      child: Column(
-        // Important: Remove any padding from the ListView.
-        //padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 255, 255, 255),
+    return Consumer<CondicaoLogin>(builder: (contect, login, child) {
+      return Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: Column(
+          // Important: Remove any padding from the ListView.
+          //padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
+              child: ListView(
+                children: [
+                  const UserSideMenu(),
+                  Center(
+                      child: user.isLogado()
+                          ? Text(user.usuario!.nome.toUpperCase(),
+                              style: TextStyle(
+                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                  fontSize: 20))
+                          : Text('User',
+                              style: TextStyle(
+                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                  fontSize: 20))),
+                ],
+              ),
             ),
-            child: ListView(
-              children: [
-                const UserSideMenu(),
-                Center(
-                    child: user.isLogado()
-                        ? Text(user.usuario!.nome.toUpperCase(),
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 20))
-                        : Text('User',
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 20))),
-              ],
+            ListTile(
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, "/home", (r) => false);
+              },
             ),
-          ),
-          ListTile(
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
-            },
-          ),
-          ListTile(
-            title: const Text('Carrinho'),
-            onTap: () {
-              // Update the state of the app
-              // Then close the drawer
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute<void>(builder: (BuildContext context) {
-                return CartScreen();
-              }));
-            },
-          ),
-          user.isLogado()
-              ? ListTile(
-                  title: const Text('Minhas Compras'),
-                  onTap: () {
-                    // Update the state of the app
-                    // Then close the drawer
-                    Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute<void>(
-                        builder: (BuildContext context) {
-                      return OrdersScreen();
-                    }));
-                  },
-                )
-              : ListTile(),
-          Expanded(
-              child: Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: user.isLogado()
+            ListTile(
+              title: const Text('Carrinho'),
+              onTap: () {
+                // Update the state of the app
+                // Then close the drawer
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute<void>(builder: (BuildContext context) {
+                  return CartScreen();
+                }));
+              },
+            ),
+            user.isLogado()
                 ? ListTile(
-                    title: const Text('Logout'),
+                    title: const Text('Minhas Compras'),
                     onTap: () {
                       // Update the state of the app
                       // Then close the drawer
-                      logout(context);
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, "/home", (r) => false);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                        return OrdersScreen();
+                      }));
                     },
                   )
-                : ListTile(
-                    title: const Text('Login'),
-                    onTap: () {
-                      // Update the state of the app
-                      // Then close the drawer
-                      Navigator.pushNamed(context, "/login");
-                    },
-                  ),
-          )),
-        ],
-      ),
-    );
+                : ListTile(),
+            Expanded(
+                child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: user.isLogado()
+                  ? ListTile(
+                      title: const Text('Logout'),
+                      onTap: () {
+                        // Update the state of the app
+                        // Then close the drawer
+                        logout(context);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, "/home", (r) => false);
+                      },
+                    )
+                  : ListTile(
+                      title: const Text('Login'),
+                      onTap: () {
+                        // Update the state of the app
+                        // Then close the drawer
+                        Navigator.pushNamed(context, "/login");
+                      },
+                    ),
+            )),
+          ],
+        ),
+      );
+    });
   }
 }

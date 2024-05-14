@@ -51,20 +51,12 @@ class MainApp extends StatelessWidget {
                 primaryColor: Colors.black,
               ),
 
-              home: Consumer2<CondicaoLogin, SearchState>(
-                builder: (context, login, state, child) {
-                  return HomePage(condLogin: login);
-                },
-              ),
+              home: const HomePage(),
               //initialRoute: '/login',
               routes: {
-                '/home': (context) => Consumer<CondicaoLogin>(
-                      builder: (contect, login, child) {
-                        return HomePage(condLogin: login);
-                      },
-                    ),
-                '/login': (context) => LoginPage(),
-                '/results': (context) => SearchResults(),
+                '/home': (context) => const HomePage(),
+                '/login': (context) => const LoginPage(),
+                '/results': (context) => const SearchResults(),
               },
             ));
   }

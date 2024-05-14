@@ -54,14 +54,14 @@ class _OrderWidgetState extends State<OrderWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        product.produto.nome!,
+                        product.produto.nome,
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
                       Text(
-                        '${product.quantidade} x R\$${product.produto.precoBase!}',
+                        '${product.quantidade} x R\$${product.produto.precoBase}',
                         style: TextStyle(
                           fontSize: 14,
                           color: Color.fromARGB(255, 94, 94, 94),

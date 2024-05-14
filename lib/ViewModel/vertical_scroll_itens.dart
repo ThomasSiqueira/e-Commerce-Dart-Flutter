@@ -1,4 +1,3 @@
-import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/ViewModel/horizontal_scroll_itens.dart';
@@ -32,11 +31,7 @@ class _VerticalScrollListState extends State<VerticalScrollList> {
   List<Widget> list = [];
 
   getList() {
-    if (state != "Todos") {
-      if (state != "") {
-        list = SelecaoPage.geraLista(context, state);
-      } else {}
-    } else {
+    if (state == "" || state == "Todos") {
       state = "";
       list = [];
       for (var i = 0; i < titulo.length; i++) {
@@ -51,6 +46,8 @@ class _VerticalScrollListState extends State<VerticalScrollList> {
           ),
         ));
       }
+    } else {
+      list = SelecaoPage.geraLista(context, state);
     }
   }
 

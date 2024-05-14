@@ -70,10 +70,10 @@ class CartItemWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 20, color: Colors.white))),
               ),
             ),
-            title: Text(cartItem.produto.nome!,
+            title: Text(cartItem.produto.nome,
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             subtitle: Text(
-                'Total: R\$ ${cartItem.produto.precoBase! * cartItem.quantidade!}',
+                'Total: R\$ ${cartItem.produto.precoBase * cartItem.quantidade}',
                 style: TextStyle(fontSize: 17, color: Colors.black)),
             trailing: Text('${cartItem.quantidade}x',
                 style: TextStyle(fontSize: 13, color: Colors.black)),

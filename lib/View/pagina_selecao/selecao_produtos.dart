@@ -13,7 +13,8 @@ class SelecaoPage {
     List<Produto> produtoList =
         Provider.of<ListaProdutos>(context, listen: false).produtos;
     for (var i = 0; i < produtoList.length; i++) {
-      if (produtoList[i].tags!.contains(flag)) {
+      if (produtoList[i].tags!.contains(flag) ||
+          (produtoList[i].nome.toUpperCase()).contains(flag.toUpperCase())) {
         list.add(Padding(
           padding: const EdgeInsets.all(5.0),
           child: ProdutoCardSelecao(produto: produtoList[i]),

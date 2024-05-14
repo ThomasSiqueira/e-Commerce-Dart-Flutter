@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/View/pagina_selecao/selecao_produtos.dart';
 import 'package:provider/provider.dart';
 import 'package:ecom_mobile/Model/searchState.dart';
 
@@ -51,7 +50,7 @@ class ScrollListBlock extends StatelessWidget {
                             image: AssetImage("assets/icones/${nome}.png"))),
                     Center(
                         child: Text(nome,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
