@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/pagina_selecao/selecao_produtos.dart';
+import 'package:provider/provider.dart';
+import 'package:ecom_mobile/Model/searchState.dart';
 
 class ScrollList {
   static List<String> stringList = [
@@ -29,27 +31,8 @@ class ScrollListBlock extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
             onTap: () => {
-                  if (ModalRoute.of(context)?.settings.name != '/')
-                    {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute<void>(
-                              builder: (BuildContext context) {
-                        return SelecaoPage(
-                          flag: nome,
-                          usuario: null,
-                        );
-                      }))
-                    }
-                  else
-                    {
-                      Navigator.push(context, MaterialPageRoute<void>(
-                          builder: (BuildContext context) {
-                        return SelecaoPage(
-                          flag: nome,
-                          usuario: null,
-                        );
-                      }))
-                    }
+                  Provider.of<SearchState>(context, listen: false)
+                      .changeState(nome)
                 },
             child: Container(
               decoration: const BoxDecoration(

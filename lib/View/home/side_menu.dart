@@ -2,7 +2,6 @@ import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
-import 'package:ecom_mobile/View/home/home.dart';
 import 'package:ecom_mobile/View/historico_compras.dart';
 import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +33,10 @@ class SideMenu extends StatelessWidget {
                             style: TextStyle(
                                 color: const Color.fromARGB(255, 0, 0, 0),
                                 fontSize: 20))
-                        : Text('User')),
+                        : Text('User',
+                            style: TextStyle(
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                                fontSize: 20))),
               ],
             ),
           ),

@@ -39,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
               child: Text('OK'),
@@ -132,11 +132,11 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: passwordController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Senha",
                           border: OutlineInputBorder(),
                           filled: false,
-                          prefixIcon: const Icon(Icons.password),
+                          prefixIcon: Icon(Icons.password),
                         ),
                         obscureText: true,
                         onChanged: (value) {
@@ -155,11 +155,11 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Confirmar Senha",
                           border: OutlineInputBorder(),
                           filled: false,
-                          prefixIcon: const Icon(Icons.password),
+                          prefixIcon: Icon(Icons.password),
                         ),
                         obscureText: true,
                         onChanged: (value) {

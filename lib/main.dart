@@ -1,4 +1,5 @@
 import 'package:ecom_mobile/Model/usuario.dart';
+import 'package:ecom_mobile/Model/searchState.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:ecom_mobile/Model/produto.dart';
 import 'package:ecom_mobile/View/search/results.dart';
@@ -39,8 +40,9 @@ class MainApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => users),
           ChangeNotifierProvider(create: (context) => produtos),
+          ChangeNotifierProvider(create: (context) => carrinho),
           ChangeNotifierProvider(
-              create: (context) => carrinho), // other providers
+              create: (context) => SearchState()), // other providers
         ],
         builder: (context, child) => MaterialApp(
               debugShowCheckedModeBanner: false,
@@ -49,8 +51,8 @@ class MainApp extends StatelessWidget {
                 primaryColor: Colors.black,
               ),
 
-              home: Consumer<CondicaoLogin>(
-                builder: (context, login, child) {
+              home: Consumer2<CondicaoLogin, SearchState>(
+                builder: (context, login, state, child) {
                   return HomePage(condLogin: login);
                 },
               ),

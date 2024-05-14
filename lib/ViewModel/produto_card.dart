@@ -1,4 +1,4 @@
-import 'package:ecom_mobile/View/produto/dedtalhes_produto.dart';
+import 'package:ecom_mobile/View/produto/detalhes_produto.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/produto.dart';
 
