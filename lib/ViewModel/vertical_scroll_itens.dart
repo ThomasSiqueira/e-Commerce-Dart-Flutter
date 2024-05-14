@@ -19,14 +19,16 @@ class _VerticalScrollListState extends State<VerticalScrollList> {
     'Mais Vendidos',
     'Celulares',
     'Computadores',
-    'Eletrodomesticos'
+    'Eletrodomesticos',
+    'Vestuário'
   ];
   List<String> flag = [
     'Promocoes',
     'MaisVendidos',
     'Celulares',
     'Computadores',
-    'Eletrodomesticos'
+    'Eletrodomesticos',
+    'Vestuario'
   ];
   List<Widget> list = [];
 

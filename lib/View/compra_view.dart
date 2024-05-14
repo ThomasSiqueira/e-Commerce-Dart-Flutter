@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/Model/compra.dart';
+import 'package:provider/provider.dart';
+
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var compras = Provider.of<ListaCompra>(context, listen: false);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Meus Pedidos'),
+          centerTitle: true,
+        ),
+        body: ListView.builder(
+          itemCount: compras.lista.length,
+          itemBuilder: (ctx, index) =>
+              OrderWidget(compra: compras, index: index),
+        ));
+  }
+}
 
 class OrderWidget extends StatefulWidget {
-  final Compra compra;
-  OrderWidget({required this.compra});
+  final ListaCompra compra;
+  final int index;
+  const OrderWidget({super.key, required this.compra, required this.index});
   @override
   _OrderWidgetState createState() => _OrderWidgetState();
 }
@@ -13,22 +34,24 @@ class _OrderWidgetState extends State<OrderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final itemsHeight = (widget.compra.lista.length * 22.0) + 4;
+    final itemsHeight =
+        (widget.compra.lista[widget.index].lista.length * 24.0) + 7;
+
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      height: _expanded ? itemsHeight + 92 : 92,
+      duration: const Duration(milliseconds: 300),
+      height: _expanded ? itemsHeight + 100 : 100,
       child: Card(
-        color: Color.fromARGB(255, 228, 228, 228),
-        margin: EdgeInsets.all(10),
+        color: const Color.fromARGB(255, 228, 228, 228),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             ListTile(
               title: Text(
-                'R\$ 4000.00',
+                'R\$ ${widget.compra.lista[widget.index].getTotal()}',
                 style: TextStyle(color: Colors.black),
               ),
-              subtitle:
-                  Text("10/04/2024", style: TextStyle(color: Colors.black)),
+              subtitle: Text("${widget.compra.lista[widget.index].data}",
+                  style: TextStyle(color: Colors.black)),
               trailing: IconButton(
                 icon: Icon(
                   Icons.expand_more,
@@ -49,7 +72,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                 vertical: 4,
               ),
               child: ListView(
-                children: widget.compra.lista.map((product) {
+                children:
+                    widget.compra.lista[widget.index].lista.map((product) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

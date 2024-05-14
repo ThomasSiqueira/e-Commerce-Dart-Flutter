@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/home.dart';
 import 'package:provider/provider.dart';
+import 'package:ecom_mobile/Model/compra.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MainApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => users),
           ChangeNotifierProvider(create: (context) => produtos),
           ChangeNotifierProvider(create: (context) => carrinho),
+          ChangeNotifierProvider(create: (context) => ListaCompra()),
           ChangeNotifierProvider(
               create: (context) => SearchState()), // other providers
         ],

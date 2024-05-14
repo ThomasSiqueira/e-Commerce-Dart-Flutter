@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  'Sign In',
+                  'Fazer Login',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       }
                     },
-                    child: const Text('Logiin'),
+                    child: const Text('Login'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,

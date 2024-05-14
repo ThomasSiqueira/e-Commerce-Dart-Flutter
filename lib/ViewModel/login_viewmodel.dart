@@ -3,8 +3,8 @@ import 'package:ecom_mobile/Model/produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:flutter/material.dart';
-import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:provider/provider.dart';
+import 'package:ecom_mobile/Model/compra.dart';
 
 Future<String> novoLogin(BuildContext context, String email, String password,
     CondicaoLogin condLogin) async {
@@ -25,9 +25,10 @@ Future<String> novoLogin(BuildContext context, String email, String password,
     print('Erro ao autenticar: $e');
   }
 
-  Provider.of<Carrinho>(context, listen: false).initCarrinho(
-      Provider.of<CondicaoLogin>(context, listen: false),
-      Provider.of<ListaProdutos>(context, listen: false));
+  var user = Provider.of<CondicaoLogin>(context, listen: false);
+  var compras = Provider.of<ListaProdutos>(context, listen: false);
+  Provider.of<Carrinho>(context, listen: false).initCarrinho(user, compras);
+  Provider.of<ListaCompra>(context, listen: false).initCompras(user, compras);
 
   return errorMessage;
 }

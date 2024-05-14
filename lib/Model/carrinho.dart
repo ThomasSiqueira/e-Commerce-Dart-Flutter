@@ -25,8 +25,6 @@ class Carrinho extends ChangeNotifier {
         for (var entrada in p["itens"]) {
           for (var item in produtos.produtos) {
             if (item.id == entrada["item"]) {
-              print(entrada["item"]);
-              print(entrada["quantidade"]);
               _lista.add(
                 ProdutoCarrinho(
                     produto: item, quantidade: entrada["quantidade"]),
@@ -103,9 +101,10 @@ class Carrinho extends ChangeNotifier {
   limpaCarrinho(CondicaoLogin user) {
     _lista.clear();
     attCarrinho(user);
+    notifyListeners();
   }
 
-  Future<List<ProdutoCarrinho>> getProdutos(user) async {
+  List<ProdutoCarrinho> getProdutos(user) {
     return _lista;
   }
 

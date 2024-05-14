@@ -49,6 +49,7 @@ dependencies:
   firebase_auth: ^4.19.5
   provider: ^6.1.2
   shared_preferences: ^2.2.3
+  intl: ^0.19.0
 
 dev_dependencies:
   build_runner: ^2.4.9
@@ -75,12 +76,14 @@ flutter:
     - assets/Produtos/ASUS_Vivobook_12.jpg
     - assets/Produtos/brastemp_375L.jpg
     - assets/Produtos/Atlas_4bocas.jpg
+    - assets/Produtos/Adidas_Breaknet.webp
     - assets/icones/userIcon.svg
     - assets/icones/Todos.png
     - assets/icones/Celulares.png
     - assets/icones/Computadores.png
     - assets/icones/Eletrodomesticos.png
     - assets/icones/Vestuario.png
+    
 
 
   # The following line ensures that the Material Icons font is

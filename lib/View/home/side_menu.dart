@@ -2,7 +2,7 @@ import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
-import 'package:ecom_mobile/View/historico_compras.dart';
+import 'package:ecom_mobile/View/compra_view.dart';
 import 'package:ecom_mobile/ViewModel/login_viewmodel.dart';
 import 'package:provider/provider.dart';
 
