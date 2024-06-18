@@ -33,9 +33,9 @@ O projeto é um e-commerce desenvolvido em Flutter, com as seguintes funcionalid
   - Permite navegar entre outras páginas, além de fornecer a opção de logout.
  
 - **Pagina de suporte:**
-    -Permite a comunicação com um backending emuluando a comunicação com o suporte do ecommerce
-    -Permite menssagens de texto, foto da galeria e foto com a camera
-    -Permite receber as respostas em tempo real do backEnd utilizando FirebaseFunctions
+  - Permite a comunicação com um backending emuluando a comunicação com o suporte do ecommerce.
+  - Permite menssagens de texto, foto da galeria e foto com a camera.
+  - Permite receber as respostas em tempo real do backEnd utilizando FirebaseFunctions.
 
 ## Particularidades 
 
