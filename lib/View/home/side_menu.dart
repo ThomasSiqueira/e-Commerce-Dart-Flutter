@@ -1,5 +1,6 @@
 import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/View/carrinho/carrinho_view.dart';
+import 'package:ecom_mobile/View/chatPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mobile/View/home/user_side_menu.dart';
 import 'package:ecom_mobile/View/compra_view.dart';
@@ -60,6 +61,18 @@ class SideMenu extends StatelessWidget {
                 }));
               },
             ),
+            user.isLogado()
+                ? ListTile(
+                    title: const Text('Suporte'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                        return const ChatPage();
+                      }));
+                    },
+                  )
+                : ListTile(),
             user.isLogado()
                 ? ListTile(
                     title: const Text('Minhas Compras'),

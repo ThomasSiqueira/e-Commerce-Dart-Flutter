@@ -50,13 +50,10 @@ class Carrinho extends ChangeNotifier {
                   {"item": item.produto.id, "quantidade": item.quantidade}
               }
             });
-
-            print("Tentando2");
           } catch (e) {
             print("Error");
           }
         } else {
-          print("Tentando3");
           var batch = FirebaseFirestore.instance.batch();
           final post = snapshot.docs[0].reference;
           try {

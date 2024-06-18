@@ -2,6 +2,7 @@ import 'package:ecom_mobile/Model/usuario.dart';
 import 'package:ecom_mobile/Model/searchState.dart';
 import 'package:ecom_mobile/Model/carrinho.dart';
 import 'package:ecom_mobile/Model/produto.dart';
+import 'package:ecom_mobile/Model/messageProvider.dart';
 import 'package:ecom_mobile/View/search/results.dart';
 import 'package:ecom_mobile/View/login/login.dart';
 import 'package:ecom_mobile/firebase_options.dart';
@@ -14,7 +15,7 @@ import 'package:ecom_mobile/Model/compra.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  MessageProvider state = MessageProvider();
   ListaProdutos produtos = await ListaProdutos.create();
   CondicaoLogin users = CondicaoLogin();
   Carrinho carrinho = Carrinho();
@@ -23,6 +24,7 @@ void main() async {
     produtos: produtos,
     users: users,
     carrinho: carrinho,
+    state: state,
   ));
 }
 
@@ -30,16 +32,19 @@ class MainApp extends StatelessWidget {
   final ListaProdutos produtos;
   final CondicaoLogin users;
   final Carrinho carrinho;
+  final MessageProvider state;
   const MainApp(
       {super.key,
       required this.produtos,
       required this.users,
-      required this.carrinho});
+      required this.carrinho,
+      required this.state});
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => users),
+          ChangeNotifierProvider(create: (context) => state),
           ChangeNotifierProvider(create: (context) => produtos),
           ChangeNotifierProvider(create: (context) => carrinho),
           ChangeNotifierProvider(create: (context) => ListaCompra()),
