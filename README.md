@@ -31,15 +31,15 @@ O projeto é um e-commerce desenvolvido em Flutter, com as seguintes funcionalid
 
 - **Sidemenu:**
   - Permite navegar entre outras páginas, além de fornecer a opção de logout.
+ 
+- **Pagina de suporte:**
+  - Permite a comunicação com um backending emuluando a comunicação com o suporte do ecommerce.
+  - Permite menssagens de texto, foto da galeria e foto com a camera.
+  - Permite receber as respostas em tempo real do backEnd utilizando FirebaseFunctions.
 
-## Particularidades e Funcionalidades Faltantes
+## Particularidades 
 
-O projeto atualmente apresenta as funcionalidades principais de um e-commerce, incluindo autenticação, navegação entre categorias, adição e remoção de produtos do carrinho, além da visualização dos pedidos. No entanto, algumas particularidades e funcionalidades podem ser destacadas:
-
-- **Funcionalidades Faltantes:**
-  - Finalizar pedido
-  - Editar carrinho
-
+O projeto atualmente apresenta as funcionalidades principais de um e-commerce, incluindo autenticação, navegação entre categorias, adição e remoção de produtos do carrinho, além da visualização dos pedidos.
 ## Atividades Desenvolvidas por Cada Membro da Equipe
 
 - **João:**
